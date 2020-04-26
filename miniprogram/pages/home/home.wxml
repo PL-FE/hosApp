@@ -1,0 +1,7 @@
+<!--miniprogram/pages/home.wxml-->
+<view class="btn-content">
+  <van-button type="primary" class="RadioBtn" bindtap="handleAppoint">预约</van-button>
+</view>
+<view class="btn-content">
+  <van-button type="info" class="RadioBtn">历史</van-button>
+</view>

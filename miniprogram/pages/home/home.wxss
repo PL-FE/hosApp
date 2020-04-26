@@ -1,0 +1,11 @@
+/* miniprogram/pages/home.wxss */
+.btn-content {
+  margin: 180rpx auto 0;
+}
+
+.RadioBtn button{
+  border-radius: 50%;
+  width: 300rpx;
+  height: 300rpx;
+  font-size: 50rpx;
+}
