@@ -15,9 +15,8 @@ Page({
     console.log(e.detail.encryptedData)
   },
   handleAppoint () {
-    console.log(2)
       wx.redirectTo({
-        url: '../appoint/appoint',
+        url: '../appoint/appoint'
       })
       return
   },

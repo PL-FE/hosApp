@@ -1,0 +1,4 @@
+/* components/navbar/navbar.wxss */
+.van-nav-bar {
+  padding-top: 0 !important;
+}

@@ -1,45 +1,26 @@
-// miniprogram/pages/appoint/appoint.js\
-const citys = {
-  '浙江': ['杭州', '宁波', '温州', '嘉兴', '湖州'],
-  '福建': ['福州', '厦门', '莆田', '三明', '泉州']
-}
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    value: '',
-    columns: [
-      {
-        values: Object.keys(citys),
-        className: 'column1'
-      },
-      {
-        values: citys['浙江'],
-        className: 'column2',
-        defaultIndex: 2
-      }
-    ],
-    show: false,
+    active: 0
   },
-  onChange(event) {
-    // event.detail 为当前输入的值
-    console.log(event.detail);
+  onChangeTabs(event) {
+    console.log(event.detail)
+    if (event.detail === 0) {
+      wx.redirectTo({
+        url: '/pages/appoint/appoint',
+      })
+    } else {
+      wx.redirectTo({
+        url: '/pages/history/history',
+      })
+    }
+    // event.detail 的值为当前选中项的索引
+    this.setData({ active: event.detail });
   },
-  change(event) {
-    const { picker, value, index } = event.detail;
-    console.log(event)
-    picker.setColumnValues(1, citys[value[0]]);
-  },
-  showPopup() {
-    this.setData({ show: true });
-  },
-
-  onClose() {
-    this.setData({ show: false });
-  },
- 
   /**
    * 生命周期函数--监听页面加载
    */

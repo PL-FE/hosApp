@@ -1,4 +1,5 @@
 <!--miniprogram/pages/appoint/appoint.wxml-->
+
 <view class="_title">填写信息</view>
 <van-cell-group>
   <van-field
@@ -19,6 +20,7 @@
   
 </van-cell-group>
 
+<van-button type="primary" class="center">提交</van-button>
 <van-popup
   show="{{ show }}"
   closeable

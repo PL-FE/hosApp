@@ -1,0 +1,11 @@
+
+<navbar />
+
+<appoint  />
+
+
+<van-tabbar active="{{ active }}" bind:change="onChangeTabs">
+  <van-tabbar-item icon="home-o">预约</van-tabbar-item>
+  <van-tabbar-item icon="search">历史</van-tabbar-item>
+</van-tabbar>
+
