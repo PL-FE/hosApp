@@ -1,2 +1,29 @@
 <!--miniprogram/pages/appoint/appoint.wxml-->
-<text>miniprogram/pages/appoint/appoint.wxml</text>
+<view class="_title">填写信息</view>
+<van-cell-group>
+  <van-field
+    value="{{ username }}"
+    required
+    clearable
+    label="用户名"
+    placeholder="请输入用户名"
+  />
+
+  <van-field
+    value="{{ password }}"
+    label="密码"
+    placeholder="请输入密码"
+    required
+  />
+<van-cell title="展示弹出层" is-link bind:click="showPopup" />
+  
+</van-cell-group>
+
+<van-popup
+  show="{{ show }}"
+  closeable
+  position="bottom"
+  bind:close="onClose"
+>
+<van-picker columns="{{ columns }}" bind:change="onChange" />
+</van-popup>

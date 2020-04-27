@@ -5,29 +5,30 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    data: {
+      canIUse: wx.canIUse('button.open-type.getUserInfo')
+    },
+  },
+  getPhoneNumber(e) {
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
   },
   handleAppoint () {
     console.log(2)
-    if (!wx.cloud) {
       wx.redirectTo({
         url: '../appoint/appoint',
       })
       return
-    }
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onLoad: function () {
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
