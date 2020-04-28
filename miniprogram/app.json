@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/appoint/appoint",
-    "pages/subhome/subhome",
-    "pages/history/history",
     "pages/home/home",
-    "components/tabbar/tabbar",
+    "pages/datacharts/datacharts",
+    "pages/subhome/subhome",
+    "pages/appoint/appoint",
+    "pages/history/history",
     "components/navbar/navbar"
   ],
   "window": {
@@ -28,6 +28,8 @@
     "van-nav-bar": "@vant/weapp/nav-bar/index",
     "van-icon": "@vant/weapp/icon/index",
     "van-radio": "@vant/weapp/radio/index",
-    "van-radio-group": "@vant/weapp/radio-group/index"
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "navbar": "/components/navbar/navbar",
+    "ec-canvas": "./ec-canvas/ec-canvas"
   }
 }

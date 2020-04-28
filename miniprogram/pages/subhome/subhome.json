@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "tabbar": "/components/tabbar/tabbar",
     "navbar": "/components/navbar/navbar",
     "appoint": "/pages/appoint/appoint",
     "history": "/pages/history/history"

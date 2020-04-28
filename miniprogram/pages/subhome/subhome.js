@@ -8,18 +8,15 @@ Page({
     active: 0
   },
   onChangeTabs(event) {
-    console.log(event.detail)
-    if (event.detail === 0) {
-      wx.redirectTo({
-        url: '/pages/appoint/appoint',
-      })
-    } else {
-      wx.redirectTo({
-        url: '/pages/history/history',
-      })
-    }
     // event.detail 的值为当前选中项的索引
     this.setData({ active: event.detail });
+  },
+  onClickBack() {
+    wx.redirectTo({
+      url: '/pages/home/home',
+    })
+    return
+    wx.showToast({ title: '点击返回', icon: 'none' });
   },
   /**
    * 生命周期函数--监听页面加载

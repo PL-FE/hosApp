@@ -1,0 +1,9 @@
+<!--miniprogram/pages/datacharts/datacharts.wxml-->
+<navbar active='数据'/>
+
+<view class="container">
+  <view class="chart-line">
+    <ec-canvas id="ec_line" canvas-id="ec_line" ec="{{ ec }}">
+    </ec-canvas>
+  </view>
+</view>

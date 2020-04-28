@@ -1,4 +1,5 @@
 //app.js
+// import * as echarts from './ec-canvas/echarts';
 App({
   onLaunch: function () {
     

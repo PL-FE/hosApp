@@ -3,5 +3,5 @@
   <van-button type="primary" class="RadioBtn" bindtap="handleAppoint">预约</van-button>
 </view>
 <view class="btn-content">
-  <van-button type="info" class="RadioBtn">数据</van-button>
+  <van-button type="info" class="RadioBtn" bindtap="handleCharts">数据</van-button>
 </view>

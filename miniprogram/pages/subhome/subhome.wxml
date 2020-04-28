@@ -1,8 +1,12 @@
 
-<navbar />
+<navbar active='{{active}}'/>
 
-<appoint  />
-
+<block wx:if="{{active === 0}}">
+  <appoint  />
+</block>
+<block wx:if="{{active > 0}}">
+  <history  />
+</block>
 
 <van-tabbar active="{{ active }}" bind:change="onChangeTabs">
   <van-tabbar-item icon="home-o">预约</van-tabbar-item>

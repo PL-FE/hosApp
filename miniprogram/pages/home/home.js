@@ -16,7 +16,13 @@ Page({
   },
   handleAppoint () {
       wx.redirectTo({
-        url: '../appoint/appoint'
+        url: '../subhome/subhome'
+      })
+      return
+  },
+  handleCharts () {
+      wx.redirectTo({
+        url: '../datacharts/datacharts'
       })
       return
   },
