@@ -40,4 +40,11 @@ icon="friends-o"
 
 
 <van-button type="primary" round="true" color="#66CDAA" size="normal"  class="center">确认预约</van-button>
-
+<van-popup
+  show="{{ show }}"
+  closeable
+  position="bottom"
+  bind:close="onClose"
+>
+<van-picker columns="{{ columns }}" bind:change="onChange" />
+</van-popup>
