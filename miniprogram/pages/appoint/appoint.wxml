@@ -7,8 +7,9 @@
 
 <van-cell-group>
   <van-field
+    bindchange="inputXueyuan"
     icon="hotel-o"
-    value="{{ username }}"
+    value="{{ xueyuan }}"
     clearable
     label=""
     placeholder="  请输入所在学院"
@@ -17,18 +18,25 @@
 
 <van-field
 icon="friends-o"
-    value="{{ username }}"
+    bindchange="inputNianji"
+    value="{{ nianji }}"
     required
     clearable
     label=""
     placeholder="  请输入所在年级"
   />
- 
-<van-cell label="预约时间" icon=clock-o" arrow-direction="down" is-link bind:click="showPopup" />
+<view class="_title">
+  <text>选择就诊病类：</text>
+</view>
+  <radio-group class='radio-group' bindchange="radioChange">
+    <radio  class='radio' style='margin-left: 11px;' wx:for-items="{{diseases}}" wx:key="num" value="{{item.num}}" checked="{{item.checked}}">
+    <text class="radioLab" style='margin-left: 0px;'>{{item.value}}</text>
+    </radio>
+</radio-group>
 
 
-
-<van-field
+  <van-field
+    bindchange="inputMsg"
     value="{{ message }}"
     label="病症描述："
     type="textarea"
@@ -36,10 +44,14 @@ icon="friends-o"
     autosize
     border="{{ true }}"
   />
-</van-cell-group>
+ 
+
+<van-cell label="预约时间" icon=clock-o" arrow-direction="down" is-link bind:click="showPopup" />
 
 
-<van-button type="primary" round="true" color="#66CDAA" size="normal"  class="center">确认预约</van-button>
+
+
+<van-button type="primary"  color="#66CDAA" round="true" class="center">确认预约</van-button>
 <van-popup
   show="{{ show }}"
   closeable
@@ -48,3 +60,5 @@ icon="friends-o"
 >
 <van-picker columns="{{ columns }}" bind:change="onChange" />
 </van-popup>
+
+</van-cell-group>
