@@ -4,61 +4,55 @@
   <text>请填写预约信息</text>
 </view>
 
+<form bindsubmit='formSubmit'>
+  <van-cell-group>
+    <van-field icon="friends-o" name="name" value="{{ name }}" required clearable label="" placeholder="  请输入姓名" />
+    <van-field icon="hotel-o" name="no" value="{{ no }}" clearable label="" placeholder="  请输入学号" required />
 
-<van-cell-group>
-  <van-field
-    bindchange="inputXueyuan"
-    icon="hotel-o"
-    value="{{ xueyuan }}"
-    clearable
-    label=""
-    placeholder="  请输入所在学院"
-    required
-  />
+   
+  <van-cell label="预约时间" id="time" icon=clock-o" arrow-direction="down" is-link bind:click="showPopup" />
+  <van-cell label="学院专业" id="department" arrow-direction="down" is-link bind:click="showPopup" />
+  <van-cell label="科室" id="office" arrow-direction="down" is-link bind:click="showPopup" />
+  <van-cell label="病类" id="category" arrow-direction="down" is-link bind:click="showPopup" />
 
-<van-field
-icon="friends-o"
-    bindchange="inputNianji"
-    value="{{ nianji }}"
-    required
-    clearable
-    label=""
-    placeholder="  请输入所在年级"
-  />
-<view class="_title">
-  <text>选择就诊病类：</text>
-</view>
-  <radio-group class='radio-group' bindchange="radioChange">
-    <radio  class='radio' style='margin-left: 11px;' wx:for-items="{{diseases}}" wx:key="num" value="{{item.num}}" checked="{{item.checked}}">
-    <text class="radioLab" style='margin-left: 0px;'>{{item.value}}</text>
-    </radio>
-</radio-group>
+  <van-button type="primary "  color="#66CDAA " round="true " class="center" >
+  <button form-type='submit' style="color:#fff;">确认预约</button>
+  </van-button>
 
 
-  <van-field
-    bindchange="inputMsg"
-    value="{{ message }}"
-    label="病症描述："
-    type="textarea"
-    placeholder="如：头疼、流鼻涕、呕吐等"
-    autosize
-    border="{{ true }}"
-  />
- 
-
-<van-cell label="预约时间" icon=clock-o" arrow-direction="down" is-link bind:click="showPopup" />
-
-
-
-
-<van-button type="primary"  color="#66CDAA" round="true" class="center">确认预约</van-button>
+</van-cell-group>
 <van-popup
-  show="{{ show }}"
-  closeable
+  show="{{ showTime }}"
   position="bottom"
   bind:close="onClose"
 >
-<van-picker columns="{{ columns }}" bind:change="onChange" />
+<van-datetime-picker
+  type="datetime"
+  value="{{ currentDate }}"
+  min-date="{{ minDate }}"
+  filter="{{ filter }}"
+  bind:input="onInput"
+/>
 </van-popup>
-
-</van-cell-group>
+<van-popup
+  show="{{ showDepartment }}"
+  position="bottom"
+  bind:close="onClose"
+>
+<van-picker columns="{{ departmentInfo }}" bind:change="onChangeDepartment" />
+</van-popup>
+<van-popup
+  show="{{ showOffice }}"
+  position="bottom"
+  bind:close="onClose"
+>
+<van-picker columns="{{ office }}" bind:change="onChangeDepartment" />
+</van-popup>
+<van-popup
+  show="{{ showCategory }}"
+  position="bottom"
+  bind:close="onClose"
+>
+<van-picker columns="{{ category }}" bind:change="onChangeDepartment" />
+</van-popup>
+ </form>

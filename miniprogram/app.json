@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/subhome/subhome",
     "pages/appoint/appoint",
     "pages/datacharts/datacharts",
     "pages/home/home",
-    "pages/subhome/subhome",
     "pages/history/history",
     "components/navbar/navbar"
   ],

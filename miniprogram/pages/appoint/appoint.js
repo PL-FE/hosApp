@@ -1,137 +1,82 @@
-// miniprogram/pages/appoint/appoint.js\
-const citys = {
-  '9时': ['00分', '30分'],
-  '10时': ['00分', '30分'],
-  '11时': ['00分', '30分'],
-  '14时': ['00分', '30分'],
-  '15时': ['00分', '30分'],
-  '16时': ['00分', '30分'],
-  '17时': ['00分', '30分']
-}
-Page({
 
-  /**
-   * 页面的初始数据
-   */
+const { gradeInfo, department, office, category} = require('../../data/user.js')
+Page({
   data: { 
-    xueyuan:'',
-    nianji:'',
-    message:'',
-    value: '',
-    diseases:[
-      {num:'0',value:"感冒",checked:false},
-      {num:'1',value:"胃炎",checked:false},
-      {num:'2',value:"发烧",checked:false}
-    ],
-    columns: [
+    no: '',
+    name: '',
+    department:'',
+    gradeInfo: gradeInfo,
+    category: category,
+    office: office,
+    showTime: false,
+    showOffice: false,
+    showCategory: false,
+    showDepartment: false,
+    minHour: 10,
+    maxHour: 20,
+    minDate: new Date().getTime(),
+    maxDate: new Date(2021, 10, 1).getTime(),
+    currentDate: new Date().getTime(),
+    filter(type, options) {
+      if (type === 'minute') {
+        return options.filter(option => option % 30 === 0)
+      }
+      return options;
+    },
+    departmentInfo: [
       {
-        values: Object.keys(citys),
+        values: Object.keys(department),
         className: 'column1'
       },
       {
-        values: citys['9时'],
+        values: department['浙江'],
         className: 'column2',
         defaultIndex: 2
       }
-    ],
-    show: false,
+    ]
   },
-  //获取病类数据
-  radioChange(e){
-    console.log('单选框：',e.detail.value);
+  formSubmit (e) {
+    console.log(e)
   },
-  //获取学院数据
-  inputXueyuan(e){
+  showPopup (e) {
+    let id = e.target.id
+    let obj = {}
+    switch (id) {
+      case 'time':
+          obj.showTime = true
+        break;
+      case 'office':
+          obj.showOffice= true
+        break;
+      case 'department':
+          obj.showDepartment = true
+        break;
+      case 'category':
+        obj.showCategory = true
+        break;
+      default:
+    }
     this.setData({
-      xueyuan:e.detail
-    }),
-    console.log(e);
+      ...obj
+    })
   },
-  //获取年级信息
-  inputNianji(e){
+  onClose () {
+    let obj = {
+      showTime: false,
+      showDepartment: false,
+      showCategory: false,
+      showOffice: false
+    }
     this.setData({
-      nianji:e.detail
-    }),
-    console.log(e);
+      ...obj
+    })
   },
-  //获取病症信息
-  inputMsg(e){
+  onInput(event) {
     this.setData({
-      message:e.detail
-    }),
-    console.log(e);
+      currentDate: event.detail
+    });
   },
-  onChange(event) {
-    // event.detail 为当前输入的值
-    console.log(event.detail);
-  },
-
-
-  change(event) {
-    const { picker, value, index } = event.detail;
-    console.log(event)
-    picker.setColumnValues(1, citys[value[0]]);
-  },
-  showPopup() {
-    this.setData({ show: true });
-  },
-  onClose() {
-    this.setData({ show: false });
-  },
- 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onChangeDepartment (e) {
+    console.log(e)
   }
 })
