@@ -1,15 +1,13 @@
 
+const activeName = ['预约', '历史']
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    active: 0
+    active: 0,
+    activeName: '预约'
   },
   onChangeTabs(event) {
     // event.detail 的值为当前选中项的索引
-    this.setData({ active: event.detail });
+    this.setData({ active: event.detail, activeName: activeName[event.detail] });
   },
   onClickBack() {
     wx.redirectTo({

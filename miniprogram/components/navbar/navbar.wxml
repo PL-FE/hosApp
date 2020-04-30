@@ -1,6 +1,7 @@
 <van-nav-bar
-  title="{{ active }}"
+  title="{{ activeName }}"
   left-text="返回"
   left-arrow
+  safe-area-inset-top="{{ false }}"
   bind:click-left="onClickBack"
 />

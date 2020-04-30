@@ -1,0 +1,7 @@
+<van-popup
+  show="{{ isShow }}"
+  position="bottom"
+  bind:close="onClose"
+>
+<slot></slot>
+</van-popup>

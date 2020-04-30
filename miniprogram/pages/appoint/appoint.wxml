@@ -4,55 +4,57 @@
   <text>请填写预约信息</text>
 </view>
 
-<form bindsubmit='formSubmit'>
   <van-cell-group>
-    <van-field icon="friends-o" name="name" value="{{ name }}" required clearable label="" placeholder="  请输入姓名" />
-    <van-field icon="hotel-o" name="no" value="{{ no }}" clearable label="" placeholder="  请输入学号" required />
+    <van-field icon="friends-o" 
+      bind:clear="onConfirmFrom"
+      id="name"
+      bind:blur="onConfirmFrom"
+      value="{{ name }}"
+      clearable
+      placeholder="请输入姓名" 
+     />
+    <van-field icon="hotel-o"
+      bind:clear="onConfirmFrom"
+      bind:blur="onConfirmFrom"
+      id="no"
+      value="{{ no }}"
+      clearable
+      placeholder="请输入学号" />
 
    
-  <van-cell label="预约时间" id="time" icon=clock-o" arrow-direction="down" is-link bind:click="showPopup" />
-  <van-cell label="学院专业" id="department" arrow-direction="down" is-link bind:click="showPopup" />
-  <van-cell label="科室" id="office" arrow-direction="down" is-link bind:click="showPopup" />
-  <van-cell label="病类" id="category" arrow-direction="down" is-link bind:click="showPopup" />
+      <van-cell value="{{ time }}" label="预约时间" id="time" is-link bind:click="showPopup" />
+      <van-cell value="{{ department }}" label="学院专业" id="department" is-link bind:click="showPopup" />
+      <van-cell value="{{ office }}" label="科室" id="office" is-link bind:click="showPopup" />
+      <van-cell value="{{ category }}" label="病类" id="category" is-link bind:click="showPopup" />
 
-  <van-button type="primary "  color="#66CDAA " round="true " class="center" >
-  <button form-type='submit' style="color:#fff;">确认预约</button>
-  </van-button>
+      <van-button type="primary " bind:click="formSubmit" color="#66CDAA " round="true " class="center" disabled="{{disabled}}" >
+        确认预约
+      </van-button>
 
 
-</van-cell-group>
-<van-popup
-  show="{{ showTime }}"
-  position="bottom"
-  bind:close="onClose"
->
-<van-datetime-picker
-  type="datetime"
-  value="{{ currentDate }}"
-  min-date="{{ minDate }}"
-  filter="{{ filter }}"
-  bind:input="onInput"
-/>
-</van-popup>
-<van-popup
-  show="{{ showDepartment }}"
-  position="bottom"
-  bind:close="onClose"
->
-<van-picker columns="{{ departmentInfo }}" bind:change="onChangeDepartment" />
-</van-popup>
-<van-popup
-  show="{{ showOffice }}"
-  position="bottom"
-  bind:close="onClose"
->
-<van-picker columns="{{ office }}" bind:change="onChangeDepartment" />
-</van-popup>
-<van-popup
-  show="{{ showCategory }}"
-  position="bottom"
-  bind:close="onClose"
->
-<van-picker columns="{{ category }}" bind:change="onChangeDepartment" />
-</van-popup>
- </form>
+      </van-cell-group>
+      <popup isShow="{{ showTime }}">
+      <van-datetime-picker
+        type="datetime"
+        id="time"
+        value="{{ currentDate }}"
+        min-date="{{ minDate }}"
+        filter="{{ filter }}"
+        bind:confirm="onConfirmFrom" 
+        bind:cancel="onClose"
+      />
+      </popup>
+
+
+      <popup isShow="{{ showDepartment }}">
+      <van-picker id="department" columns="{{ departmentList }}" show-toolbar="{{true}}" bind:confirm="onConfirmFrom" bind:cancel="onClose"/>
+      </popup>
+
+      <popup isShow="{{ showOffice }}">
+      <van-picker id="office" columns="{{ officeInfo }}" show-toolbar="{{true}}" bind:confirm="onConfirmFrom" bind:cancel="onClose"/>
+      </popup>
+
+      <popup isShow="{{ showCategory }}">
+      <van-picker id="category" columns="{{ categoryInfo }}" show-toolbar="{{true}}" bind:confirm="onConfirmFrom" bind:cancel="onClose"/>
+      </popup>
+
