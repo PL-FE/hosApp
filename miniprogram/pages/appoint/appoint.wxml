@@ -47,7 +47,7 @@
 
 
       <popup isShow="{{ showDepartment }}">
-      <van-picker id="department" columns="{{ departmentList }}" show-toolbar="{{true}}" bind:confirm="onConfirmFrom" bind:cancel="onClose"/>
+      <van-picker id="department"  bind:change="onChange"  columns="{{ departmentList }}" show-toolbar="{{true}}" bind:confirm="onConfirmFrom" bind:cancel="onClose"/>
       </popup>
 
       <popup isShow="{{ showOffice }}">

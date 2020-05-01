@@ -1,1 +1,23 @@
-/* pages/history/history.wxss */
+
+.right_swipe {
+  display: inline-block;
+  width: 65px;
+  height: 82px;
+  font-size: 15px;
+  line-height: 82px;
+  color: #fff;
+  text-align: center;
+  background-color: #f44;
+}
+
+.cell {
+  vertical-align: middle;
+  background-color: #fff;
+  padding:var(--cell-vertical-padding,10px) var(--cell-horizontal-padding,16px);
+}
+
+.icon {
+  height: 62px;
+  font-size: 15px;
+  line-height: 82px;
+}

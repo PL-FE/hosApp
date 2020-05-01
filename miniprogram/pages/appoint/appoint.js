@@ -34,11 +34,15 @@ Page({
         className: 'column1'
       },
       {
-        values: departmentInfo['浙江'],
+        values: departmentInfo['理学院'],
         className: 'column2',
         defaultIndex: 2
       }
     ]
+  },
+  onChange(event) {
+    const { picker, value, index } = event.detail;
+    picker.setColumnValues(1, departmentInfo[value[0]]);
   },
   verifyFrom () {
     const {

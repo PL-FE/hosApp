@@ -5,25 +5,32 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
+  let { OPENID, APPID, UNIONID } = cloud.getWXContext()
+  let initData = {
+    createTime: new Date().valueOf(),
+    createUser: OPENID, // 用 {openid} 变量，后台会自动替换为当前用户 openid
+  }
   let { name,
         no,
         department,
         time,
         office,
         category } = event
+  time = new Date(time).valueOf()
+
   const db = cloud.database()
   const user = db.collection('user')
   const result = await user.add({
     data: {
-      openid: '{openid}', // 用 {openid} 变量，后台会自动替换为当前用户 openid
       name,
       no,
       department,
-      time: new Date(time).valueOf(),
+      time,
       office,
-      category
+      category,
+      ...initData
     },
   })
 
-  return 200
+  return result
 }

@@ -1,2 +1,25 @@
-<!--pages/history/history.wxml-->
-<view>6666</view>
+<view wx:for="{{userList}}"  wx:key="_id">
+
+  <van-swipe-cell   right-width="{{ 65 }}" async-close bind:close="onClose" >
+    <van-cell-group>
+    <view class="cell">
+    <van-row>
+      <van-col span="3">
+        <van-icon color="#0af" size="20" class="icon" name="user-o" />
+      </van-col>
+      <van-col span="16">
+        <view>{{item.no}}</view>
+        <view>{{item.name}}</view>
+        <view>{{item.time}}</view>
+      </van-col> 
+      <van-col span="5">
+        <van-icon wx:if="{{item.status === -1}}" size="40" class="icon"  name="cloud://dev-s2bhf.6465-dev-s2bhf-1301968054/已失效.png" />
+      </van-col>
+    </van-row>
+      
+    </view>
+    </van-cell-group>
+    <view slot="right" class="right_swipe">删除</view>
+  </van-swipe-cell>
+
+</view>
