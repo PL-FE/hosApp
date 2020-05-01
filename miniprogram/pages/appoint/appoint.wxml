@@ -8,21 +8,21 @@
     <van-field icon="friends-o" 
       bind:clear="onConfirmFrom"
       id="name"
-      bind:blur="onConfirmFrom"
+      bind:change="onConfirmFrom"
       value="{{ name }}"
       clearable
       placeholder="请输入姓名" 
      />
     <van-field icon="hotel-o"
       bind:clear="onConfirmFrom"
-      bind:blur="onConfirmFrom"
+      bind:change="onConfirmFrom"
       id="no"
       value="{{ no }}"
       clearable
       placeholder="请输入学号" />
 
    
-      <van-cell value="{{ time }}" label="预约时间" id="time" is-link bind:click="showPopup" />
+      <van-cell value="{{ timeFormat }}" label="预约时间" id="timeFormat" is-link bind:click="showPopup" />
       <van-cell value="{{ department }}" label="学院专业" id="department" is-link bind:click="showPopup" />
       <van-cell value="{{ office }}" label="科室" id="office" is-link bind:click="showPopup" />
       <van-cell value="{{ category }}" label="病类" id="category" is-link bind:click="showPopup" />
@@ -36,10 +36,9 @@
       <popup isShow="{{ showTime }}">
       <van-datetime-picker
         type="datetime"
-        id="time"
+        id="timeFormat"
         value="{{ currentDate }}"
         min-date="{{ minDate }}"
-        filter="{{ filter }}"
         bind:confirm="onConfirmFrom" 
         bind:cancel="onClose"
       />

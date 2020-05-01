@@ -1,7 +1,8 @@
 <!--miniprogram/pages/datacharts/datacharts.wxml-->
-<navbar active='数据'/>
+<navbar activeName='数据'/>
 
-<view class="container">
+<view class="body">
+  <text class="title">时间与人数</text>
   <view class="chart-line">
     <ec-canvas id="ec_line" canvas-id="ec_line" ec="{{ ec }}">
     </ec-canvas>

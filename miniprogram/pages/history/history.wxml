@@ -7,13 +7,14 @@
       <van-col span="3">
         <van-icon color="#0af" size="20" class="icon" name="user-o" />
       </van-col>
-      <van-col span="16">
-        <view>{{item.no}}</view>
-        <view>{{item.name}}</view>
-        <view>{{item.time}}</view>
+      <van-col span="16" class="userInfo">
+        <view class="info">{{item.no}}</view>
+        <view class="info">{{item.name}}</view>
+        <view class="info" style="padding: 0;">{{item.time}}</view>
       </van-col> 
       <van-col span="5">
         <van-icon wx:if="{{item.status === -1}}" size="40" class="icon"  name="cloud://dev-s2bhf.6465-dev-s2bhf-1301968054/已失效.png" />
+        <text wx:else class="iconText">等待{{item.countActivate - 1}}人</text>
       </van-col>
     </van-row>
       

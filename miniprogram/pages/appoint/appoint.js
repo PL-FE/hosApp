@@ -7,6 +7,7 @@ Page({
     no: '',
     department:'',
     time: '',
+    timeFormat: '',
     office: '',
     category: '',
     gradeInfo: gradeInfo,
@@ -51,15 +52,23 @@ Page({
       department,
       time,
       office,
-      category,
+      category
     } = this.data
     let disabled = true
-    if (name && no && department && time.length && office.length && category.length) {
+    if (name && no && department && time && office.length && category.length) {
       disabled = false
     }
-      this.setData({
-        disabled
-      });
+    console.log({
+      name,
+      no,
+      department,
+      time,
+      office,
+      category
+    })
+    this.setData({
+      disabled
+    })
   },
   formSubmit (e) {
    const  {
@@ -83,7 +92,7 @@ Page({
     let id = e.target.id
     let obj = {}
     switch (id) {
-      case 'time':
+      case 'timeFormat':
           obj.showTime = true
         break;
       case 'office':
@@ -113,12 +122,12 @@ Page({
     })
   },
   onConfirmFrom (e) {
-    console.log(e)
     let obj = {}
-    if (e.target.id === 'time') {
+    if (e.target.id === 'timeFormat') {
+      obj.time = e.detail.value || e.detail
       obj[e.target.id] = e.detail.value || times(e.detail)
     } else {
-      obj[e.target.id] = e.detail.value
+      obj[e.target.id] = e.detail.value || e.detail
     }
     this.setData({
       ...obj
@@ -131,6 +140,11 @@ Page({
     wx.cloud.callFunction({
       name: 'add',
       data
-    }).then(console.log)
+    }).then(res=> {
+      console.log(res)
+      this.setData({
+
+      })
+    })
   }
 })

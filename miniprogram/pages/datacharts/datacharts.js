@@ -2,6 +2,8 @@
 //获取应用实例
 const app = getApp()
 import { echartlinefn, init, hybridData } from '../../utils/common';
+const db = wx.cloud.database()
+const { times } = require('../../utils/util.js')
 
 Page({
   data: {
@@ -10,61 +12,39 @@ Page({
       lazyLoad: true,
       // disableTouch: true
     },
-    color: '#4EBADB',
-    chartData: [
-      {
-        "date": "2020-03-18",
-        "show": 19,
-        "click": 0,
-        "hk_count": "0"
-      },
-      {
-        "date": "2020-03-19",
-        "show": 26,
-        "click": 0,
-        "hk_count": "0"
-      },
-      {
-        "date": "2020-03-20",
-        "show": 40,
-        "click": 1,
-        "hk_count": "0"
-      },
-      {
-        "date": "2020-03-21",
-        "show": 55,
-        "click": 1,
-        "hk_count": "0"
-      },
-      {
-        "date": "2020-03-22",
-        "show": 19,
-        "click": 0,
-        "hk_count": "0"
-      },
-      {
-        "date": "2020-03-23",
-        "show": 14,
-        "click": 1,
-        "hk_count": "0"
-      },
-      {
-        "date": "2020-03-24",
-        "show": "0",
-        "click": "0",
-        "hk_count": "0"
-      }
-    ]
+    color: '##557bd9',
+    userList: []
   },
   onLoad: function () {
+    this.init()
+    
+  },
+  init() {
+    wx.cloud.callFunction({
+      name: 'getUser'
+    }).then(res => {
+      let data = res.result.data
+      data.forEach(it => {
+        it.time = times(it.time)
+        it.createTime = times(it.createTime)
+      })
+      this.setData({
+        userList: data
+      })
+
+      this.init1()
+      
+    })
+  },
+  init1 () {
     init(
       this.selectComponent('#ec_line'),
       echartlinefn(
         this.data.color,
-        hybridData(this.data.chartData, 'date'),
-        this.data.chartData,
-        'show',
-        '曝光量'
+        hybridData(this.data.userList, 'time'),
+        this.data.userList,
+        'countActivate',
+        '人数'
       )
     );
   }

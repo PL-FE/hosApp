@@ -10,7 +10,7 @@ exports.main = async (event, context) => {
   const db = cloud.database()
   const user = db.collection('user')
 
-  let result = await user.get()
+  let result = await user.orderBy('time', 'desc').get()
   let data = result.data
 
   const newTime = new Date().valueOf()
@@ -33,15 +33,13 @@ exports.main = async (event, context) => {
     const startTime = it.time
     const endTime = it.time + 1800
     data.forEach(s => {
-      if (s._id !== it._id) {
         const sTime = s.time
         const eTime = s.time + 1800
         const Begin = Math.max(startTime, sTime)
-        const End = Math.max(endTime, eTime)
+        const End = Math.min(endTime, eTime)
         if (Begin < End) {
-          it.countActivate = it.countActivate ? it.countActivate++ : 1
+          it.countActivate = it.countActivate ? it.countActivate + 1 : 1
         }
-      }
     })
   })
 

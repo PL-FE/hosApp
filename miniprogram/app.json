@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/datacharts/datacharts",
     "pages/subhome/subhome",
     "pages/history/history",
-    "pages/home/home",
     "pages/history2/history2",
     "pages/appoint/appoint",
-    "pages/datacharts/datacharts",
     "components/navbar/navbar"
   ],
   "window": {

@@ -16,7 +16,7 @@ exports.main = async (event, context) => {
         time,
         office,
         category } = event
-  time = new Date(time).valueOf()
+
 
   const db = cloud.database()
   const user = db.collection('user')

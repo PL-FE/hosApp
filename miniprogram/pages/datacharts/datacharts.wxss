@@ -1,3 +1,17 @@
+page {
+  background-color: #fff;
+}
+
+.title {
+  margin: 10px 0px 0px 10px;
+  padding-left: 10px;
+  font-size: 14px;
+  border-left: 3px solid #557bd9;
+  line-height: 14px;
+  display: inline-block;
+  color: #557bd9;
+}
+
 .container {
   padding: 0 48rpx;
 }

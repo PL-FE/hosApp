@@ -45,7 +45,7 @@ Component({
         let data = res.result.data
         data.forEach(it => {
           it.time = times(it.time)
-
+          it.createTime = times(it.createTime)
         })
         console.log(data)
         this.setData({

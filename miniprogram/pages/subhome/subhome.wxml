@@ -1,12 +1,14 @@
 
 <navbar activeName='{{activeName}}'/>
 
-<block wx:if="{{active === 0}}">
-  <appoint  />
-</block>
-<block wx:if="{{active > 0}}">
-  <history  />
-</block>
+<scroll-view scroll-y="true" class="main-content">
+  <block wx:if="{{active === 0}}">
+    <appoint  />
+  </block>
+  <block wx:if="{{active > 0}}">
+    <history  />
+  </block>
+</scroll-view>
 
 <van-tabbar active="{{ active }}" bind:change="onChangeTabs">
   <van-tabbar-item icon="home-o">预约</van-tabbar-item>

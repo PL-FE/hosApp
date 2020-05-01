@@ -19,5 +19,17 @@
 .icon {
   height: 62px;
   font-size: 15px;
-  line-height: 82px;
+}
+.iconText {
+  line-height: 62px;
+  font-size: 12px;
+}
+
+.userInfo {
+  color: #6e6e6e;
+  font-size: 12px;
+}
+
+.info {
+  padding: 0 0 5px;
 }
