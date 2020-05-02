@@ -11,6 +11,7 @@
       bind:change="onConfirmFrom"
       value="{{ name }}"
       clearable
+      label="姓名"
       placeholder="请输入姓名" 
      />
     <van-field icon="hotel-o"
@@ -18,8 +19,19 @@
       bind:change="onConfirmFrom"
       id="no"
       value="{{ no }}"
+      label="学号"
       clearable
       placeholder="请输入学号" />
+
+       <van-field
+        value="{{ phone }}"
+        id="phone"
+        label="手机号"
+        placeholder="请输入手机号"
+        bind:blur="onConfirmFrom"
+        error-message="{{checkPhone}}"
+        border="{{ false }}"
+      />
 
    
       <van-cell value="{{ timeFormat }}" label="预约时间" id="timeFormat" is-link bind:click="showPopup" />

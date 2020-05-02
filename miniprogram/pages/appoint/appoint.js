@@ -10,9 +10,11 @@ Page({
     timeFormat: '',
     office: '',
     category: '',
+    phone: '',
     gradeInfo: gradeInfo,
     categoryInfo: categoryInfo,
     officeInfo: officeInfo,
+    checkPhone: '',
     showTime: false,
     showOffice: false,
     showCategory: false,
@@ -52,10 +54,11 @@ Page({
       department,
       time,
       office,
-      category
+      category,
+      phone
     } = this.data
     let disabled = true
-    if (name && no && department && time && office.length && category.length) {
+    if (name && no && department && phone && time && office.length && category.length) {
       disabled = false
     }
     console.log({
@@ -64,7 +67,8 @@ Page({
       department,
       time,
       office,
-      category
+      category,
+      phone
     })
     this.setData({
       disabled
@@ -78,6 +82,7 @@ Page({
      time,
      office,
      category,
+     phone
    } = this.data
     const data = {
       name,
@@ -85,7 +90,8 @@ Page({
       department,
       time,
       office,
-      category}
+      category,
+      phone}
   this.submit(data)
   },
   showPopup (e) {
@@ -122,12 +128,29 @@ Page({
     })
   },
   onConfirmFrom (e) {
+    const id = e.target.id
     let obj = {}
-    if (e.target.id === 'timeFormat') {
+    if (id === 'timeFormat') {
       obj.time = e.detail.value || e.detail
-      obj[e.target.id] = e.detail.value || times(e.detail)
+      obj[id] = e.detail.value || times(e.detail)
+    } else if (id === 'phone') {
+      this.setData({
+        checkPhone: ''
+      });
+      var pattern = /(13\d|14[579]|15[^4\D]|17[^49\D]|18\d)\d{8}/g;
+      var str = e.detail.value;
+      if (pattern.test(str)) {
+        obj[id] = e.detail.value
+      } else {
+        if (e.detail.value) {
+        this.setData({
+          checkPhone: '手机号格式错误'
+        });
+        }
+        return
+      }
     } else {
-      obj[e.target.id] = e.detail.value || e.detail
+      obj[id] = e.detail.value || e.detail
     }
     this.setData({
       ...obj
@@ -142,9 +165,7 @@ Page({
       data
     }).then(res=> {
       console.log(res)
-      this.setData({
-
-      })
+      this.triggerEvent('parentEvent', 1)
     })
   }
 })

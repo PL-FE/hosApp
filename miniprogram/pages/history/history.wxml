@@ -14,7 +14,7 @@
       </van-col> 
       <van-col span="5">
         <van-icon wx:if="{{item.status === -1}}" size="40" class="icon"  name="cloud://dev-s2bhf.6465-dev-s2bhf-1301968054/已失效.png" />
-        <text wx:else class="iconText">等待{{item.countActivate - 1}}人</text>
+        <text wx:else class="iconText">共{{item.countActivate}}人</text>
       </van-col>
     </van-row>
       

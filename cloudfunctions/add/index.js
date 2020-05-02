@@ -15,7 +15,8 @@ exports.main = async (event, context) => {
         department,
         time,
         office,
-        category } = event
+        category,
+        phone } = event
 
 
   const db = cloud.database()
@@ -28,6 +29,7 @@ exports.main = async (event, context) => {
       time,
       office,
       category,
+      phone,
       ...initData
     },
   })

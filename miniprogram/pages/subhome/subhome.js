@@ -6,6 +6,7 @@ Page({
     activeName: '预约'
   },
   onChangeTabs(event) {
+    console.log(event)
     // event.detail 的值为当前选中项的索引
     this.setData({ active: event.detail, activeName: activeName[event.detail] });
   },

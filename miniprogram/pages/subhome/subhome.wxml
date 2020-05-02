@@ -3,7 +3,7 @@
 
 <scroll-view scroll-y="true" class="main-content">
   <block wx:if="{{active === 0}}">
-    <appoint  />
+    <appoint  bind:parentEvent='onChangeTabs'/>
   </block>
   <block wx:if="{{active > 0}}">
     <history  />
