@@ -5,12 +5,13 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext()
-
+  let { OPENID, APPID, UNIONID } = cloud.getWXContext()
   const db = cloud.database()
   const user = db.collection('user')
 
-  let result = await user.orderBy('time', 'desc').get()
+  let result = await user.orderBy('time', 'desc').where({
+    createUser: OPENID
+  }).get()
   let data = result.data
 
   const newTime = new Date().valueOf()

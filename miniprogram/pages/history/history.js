@@ -52,8 +52,24 @@ Component({
           userList: data
         })
       })
+    },
+    handleDelete(event) {
+        const vm = this
+        
+      console.log(event)
+      wx.cloud.callFunction({
+        name: 'deleteUser',
+        data: {
+          id: event.target.id
+        }
+      }).then(res => {
+          this.init()
+          wx.showToast({
+            icon: 'none',
+            title: '成功删除一条记录~',
+          })
+       })
     }
-  },
-
+  }
  
 })

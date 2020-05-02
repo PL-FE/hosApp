@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/subhome/subhome",
-    "pages/home/home",
-    "pages/datacharts/datacharts",
     "pages/history/history",
+    "pages/datacharts/datacharts",
+    "pages/home/home",
     "pages/appoint/appoint",
     "components/navbar/navbar"
   ],
@@ -28,13 +28,13 @@
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
     "van-nav-bar": "@vant/weapp/nav-bar/index",
     "van-icon": "@vant/weapp/icon/index",
-    "van-radio": "@vant/weapp/radio/index",
-    "van-radio-group": "@vant/weapp/radio-group/index",
     "ec-canvas": "./ec-canvas/ec-canvas",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-swipe-cell": "@vant/weapp/swipe-cell/index",
     "van-dialog": "@vant/weapp/dialog/index",
     "van-row": "@vant/weapp/row/index",
-    "van-col": "@vant/weapp/col/index"
+    "van-col": "@vant/weapp/col/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index"
   }
 }

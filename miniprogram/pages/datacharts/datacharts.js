@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-import { echartlinefn, init, hybridData } from '../../utils/common';
+import { echartlinefn, init, hybridData, echartPiefn } from '../../utils/common';
 const db = wx.cloud.database()
 const { times } = require('../../utils/util.js')
 
@@ -42,6 +42,16 @@ Page({
       echartlinefn(
         this.data.color,
         hybridData(this.data.userList, 'time'),
+        this.data.userList,
+        'countActivate',
+        '人数'
+      )
+    );
+    init(
+      this.selectComponent('#ec_pie'),
+      echartPiefn(
+        this.data.color,
+        hybridData(this.data.userList, 'department'),
         this.data.userList,
         'countActivate',
         '人数'

@@ -1,6 +1,6 @@
 <view wx:for="{{userList}}"  wx:key="_id">
 
-  <van-swipe-cell   right-width="{{ 65 }}" async-close bind:close="onClose" >
+  <van-swipe-cell   right-width="{{ 65 }}" async-close bind:close="onClose" bind:open="onOpen">
     <van-cell-group>
     <view class="cell">
     <van-row>
@@ -20,7 +20,7 @@
       
     </view>
     </van-cell-group>
-    <view slot="right" class="right_swipe">删除</view>
+    <view slot="right" id="{{item._id}}" class="right_swipe" bindtap="handleDelete">删除</view>
   </van-swipe-cell>
 
 </view>

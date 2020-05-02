@@ -11,6 +11,7 @@ Page({
     office: '',
     category: '',
     phone: '',
+    sex: '0',
     gradeInfo: gradeInfo,
     categoryInfo: categoryInfo,
     officeInfo: officeInfo,
@@ -37,7 +38,7 @@ Page({
         className: 'column1'
       },
       {
-        values: departmentInfo['理学院'],
+        values: departmentInfo[Object.keys(departmentInfo)[0]],
         className: 'column2',
         defaultIndex: 2
       }
@@ -47,6 +48,11 @@ Page({
     const { picker, value, index } = event.detail;
     picker.setColumnValues(1, departmentInfo[value[0]]);
   },
+  onChangeRadio(event) {
+    this.setData({
+      sex: event.detail
+    })
+  },
   verifyFrom () {
     const {
       name,
@@ -55,7 +61,8 @@ Page({
       time,
       office,
       category,
-      phone
+      phone,
+      sex
     } = this.data
     let disabled = true
     if (name && no && department && phone && time && office.length && category.length) {
@@ -68,7 +75,8 @@ Page({
       time,
       office,
       category,
-      phone
+      phone,
+      sex
     })
     this.setData({
       disabled
@@ -82,7 +90,8 @@ Page({
      time,
      office,
      category,
-     phone
+     phone,
+     sex
    } = this.data
     const data = {
       name,
@@ -91,7 +100,8 @@ Page({
       time,
       office,
       category,
-      phone}
+      phone,
+      sex}
   this.submit(data)
   },
   showPopup (e) {
@@ -128,6 +138,7 @@ Page({
     })
   },
   onConfirmFrom (e) {
+    console.log(e)
     const id = e.target.id
     let obj = {}
     if (id === 'timeFormat') {
@@ -165,7 +176,11 @@ Page({
       data
     }).then(res=> {
       console.log(res)
-      this.triggerEvent('parentEvent', 1)
+      wx.showToast({
+        icon: 'success',
+        title: '添加成功~',
+      })
+      // this.triggerEvent('parentEvent', 1)
     })
   }
 })

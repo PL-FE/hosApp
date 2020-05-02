@@ -1,5 +1,4 @@
-const gradeInfo = ['大一', '大二', '大三', '大四', '其他']
-const departmentInfo = {
+{
   "地球科学学院": [
     "资源勘查工程",
     "勘查技术与工程",
@@ -80,14 +79,4 @@ const departmentInfo = {
     "工艺美术",
     "数字媒体艺术"
   ]
-}
-
-const officeInfo = ['内科', '外科', '五官科', '牙科', '其他']
-const categoryInfo = ['感冒', '肚子不舒服', '头晕', '发烧', '其他']
-
-module.exports = {
-  gradeInfo,
-  departmentInfo,
-  officeInfo,
-  categoryInfo
 }
