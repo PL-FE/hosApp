@@ -1,0 +1,34 @@
+<view class="admin-body">
+  <navbar activeName='预约管理'>
+  </navbar>
+<scroll-view class="item-body" scroll-y="true" refresher-triggered="{{refreStatus}}" refresher-enabled="true" bindrefresherrefresh="handleRefresh">
+  <view wx:for="{{userList}}" wx:key="_id">
+    <van-swipe-cell right-width="{{ 65 }}" async-close bind:close="onClose" bind:open="onOpen">
+      <van-cell-group>
+        <view class="cell">
+          <van-row>
+            <van-col span="3">
+              <van-icon color="#0af" size="20" class="icon" name="user-o" />
+            </van-col>
+            <van-col span="16" class="userInfo">
+              <view class="info">{{item.no}}</view>
+              <view class="info">{{item.name}}</view>
+              <view class="info" style="padding: 0;">{{item.time}}</view>
+            </van-col>
+            <van-col span="5">
+              <van-icon wx:if="{{item.status === -1}}" size="40" class="icon" name="cloud://dev-s2bhf.6465-dev-s2bhf-1301968054/已失效.png" />
+              <view  wx:else >
+                <van-button wx:if="{{item.status === 1}}" id="{{item._id}}" size="small" type="primary" class="cell-btn" bindtap="handlePass">到 达</van-button>
+              <van-icon wx:elif="{{item.status === 2}}" size="40" class="icon" name="cloud://dev-s2bhf.6465-dev-s2bhf-1301968054/已完成.png" />
+              <van-icon wx:elif="{{item.status === 0}}" size="40" class="icon" name="cloud://dev-s2bhf.6465-dev-s2bhf-1301968054/未开始 (1).png" />
+              </view>
+            </van-col>
+          </van-row>
+        </view>
+      </van-cell-group>
+      <view slot="right" id="{{item._id}}" data-tel="{{item.phone}}" class="right_swipe" bindtap="handlePhone">电话</view>
+    </van-swipe-cell>
+  </view>
+</scroll-view>
+</view>
+  <overlay id="overlay" />

@@ -1,18 +1,24 @@
-<!--miniprogram/pages/datacharts/datacharts.wxml-->
-<navbar activeName='数据'/>
+  <!--miniprogram/pages/datacharts/datacharts.wxml-->
+<view class="navbarStyle">
+  <navbar activeName='数据' />
+</view>
 
-<view class="body">
-  <text class="title">不同时间段预约情况图</text>
-  <view class="chart-line">
-    <ec-canvas id="ec_line" canvas-id="ec_line" ec="{{ ec }}">
-    </ec-canvas>
+<view class="dataBody">
+  <view class="body">
+    <text class="title">不同时间段预约情况图</text>
+    <view class="chart-line">
+      <ec-canvas id="ec_line" canvas-id="ec_line" ec="{{ ec }}">
+      </ec-canvas>
+    </view>
+  </view>
+
+  <view class="body">
+    <text class="title legend">各学院预约情况图</text>
+    <view class="chart-line" style="height:500px;">
+      <ec-canvas id="ec_pie" canvas-id="ec_pie" ec="{{ ec }}">
+      </ec-canvas>
+    </view>
   </view>
 </view>
 
-<view class="body">
-  <text class="title legend">各学院预约情况图</text>
-  <view class="chart-line" style="height:500px;">
-    <ec-canvas id="ec_pie" canvas-id="ec_pie" ec="{{ ec }}">
-    </ec-canvas>
-  </view>
-</view>
+<overlay id="overlay"/>

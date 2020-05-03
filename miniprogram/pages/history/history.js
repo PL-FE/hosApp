@@ -10,19 +10,22 @@ Component({
   data: {
     userList: []
   },
+
   lifetimes: {
     created() {
-      console.log("在组件实例刚刚被创建时执行")
     },
     attached() {
       this.init()
     }
   
   },
-  pageLifetimes: {
- 
-  },
+  
   methods: {
+    refresh (cb) {
+      this.selectComponent('#overlay').onClickHide(true)
+      this.init(cb)
+    },
+
     onClose(event) {
       const {
         position,
@@ -38,7 +41,8 @@ Component({
           break;
       }
     },
-    init () {
+
+    init (cb) {
       wx.cloud.callFunction({
         name: 'getUser'
       }).then(res => {
@@ -47,16 +51,17 @@ Component({
           it.time = times(it.time)
           it.createTime = times(it.createTime)
         })
-        console.log(data)
+        this.selectComponent('#overlay').onClickHide()
+        wx.stopPullDownRefresh();
+        if (cb) cb()
         this.setData({
           userList: data
         })
       })
     },
+    
     handleDelete(event) {
-        const vm = this
-        
-      console.log(event)
+      const vm = this
       wx.cloud.callFunction({
         name: 'deleteUser',
         data: {

@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/admin/admin",
     "pages/subhome/subhome",
-    "pages/history/history",
-    "pages/datacharts/datacharts",
     "pages/home/home",
+    "pages/datacharts/datacharts",
+    "pages/history/history",
     "pages/appoint/appoint",
     "components/navbar/navbar"
   ],
@@ -18,6 +19,7 @@
   "usingComponents": {
     "navbar": "/components/navbar/navbar",
     "popup": "/components/popup/popup",
+    "overlay": "/components/overlay/overlay",
     "van-button": "@vant/weapp/button/index",
     "van-field": "@vant/weapp/field/index",
     "van-cell": "@vant/weapp/cell/index",
@@ -35,6 +37,8 @@
     "van-row": "@vant/weapp/row/index",
     "van-col": "@vant/weapp/col/index",
     "van-radio": "@vant/weapp/radio/index",
-    "van-radio-group": "@vant/weapp/radio-group/index"
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-loading": "@vant/weapp/loading/index"
   }
 }

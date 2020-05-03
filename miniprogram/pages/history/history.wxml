@@ -14,7 +14,8 @@
       </van-col> 
       <van-col span="5">
         <van-icon wx:if="{{item.status === -1}}" size="40" class="icon"  name="cloud://dev-s2bhf.6465-dev-s2bhf-1301968054/已失效.png" />
-        <text wx:else class="iconText">共{{item.countActivate}}人</text>
+        <text wx:elif="{{item.status === 1 || item.status === 0}}" class="iconText">共{{item.countActivate}}人</text>
+         <van-icon wx:elif="{{item.status === 2}}" size="40" class="icon" name="cloud://dev-s2bhf.6465-dev-s2bhf-1301968054/已完成.png" />
       </van-col>
     </van-row>
       
@@ -22,5 +23,7 @@
     </van-cell-group>
     <view slot="right" id="{{item._id}}" class="right_swipe" bindtap="handleDelete">删除</view>
   </van-swipe-cell>
-
 </view>
+
+
+<overlay id="overlay"/>

@@ -1,5 +1,8 @@
 /* miniprogram/pages/appoint/appoint.wxss */
-.from-content>view {
+.info-body {
+  height: 100%;
+}
+.from-content {
   background-color: #fff;
 }
 .center {

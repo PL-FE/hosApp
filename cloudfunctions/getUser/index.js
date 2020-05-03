@@ -8,9 +8,13 @@ exports.main = async (event, context) => {
   let { OPENID, APPID, UNIONID } = cloud.getWXContext()
   const db = cloud.database()
   const user = db.collection('user')
-
+  const {status} = event
+  let obj = {}
+  if (status !== 'all') {
+    let obj = { createUser: OPENID}
+  }
   let result = await user.orderBy('time', 'desc').where({
-    createUser: OPENID
+    ...obj
   }).get()
   let data = result.data
 
@@ -19,14 +23,17 @@ exports.main = async (event, context) => {
   // 0 未开始
   // 1 有效时间
   // -1 失效
+  // 2 已完成
   data.forEach(it => {
     it.time = new Date(it.time).valueOf()
-    if (newTime - it.time > 1800000) {
-      it.status = -1
-    } else if (newTime - it.time < 1800000 && newTime > it.time) {
-      it.status = 0
-    } else {
-      it.status = 1
+    if (!it.status) {
+      if (newTime - it.time > 1800000) {
+        it.status = -1
+      } else if (newTime < it.time) {
+        it.status = 0
+      } else {
+        it.status = 1
+      }
     }
     // 区间重叠算法
     // 1、Begin = Max(A1, B1);

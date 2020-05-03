@@ -1,6 +1,7 @@
 
 const { gradeInfo, departmentInfo, officeInfo, categoryInfo} = require('../../data/user.js')
 const { times } = require('../../utils/util.js')
+
 Page({
   data: { 
     name: '',
@@ -44,6 +45,7 @@ Page({
       }
     ]
   },
+
   onChange(event) {
     const { picker, value, index } = event.detail;
     picker.setColumnValues(1, departmentInfo[value[0]]);
@@ -68,16 +70,6 @@ Page({
     if (name && no && department && phone && time && office.length && category.length) {
       disabled = false
     }
-    console.log({
-      name,
-      no,
-      department,
-      time,
-      office,
-      category,
-      phone,
-      sex
-    })
     this.setData({
       disabled
     })
@@ -94,16 +86,17 @@ Page({
      sex
    } = this.data
     const data = {
-      name,
-      no,
-      department,
-      time,
-      office,
-      category,
-      phone,
-      sex}
-  this.submit(data)
+        name,
+        no,
+        department,
+        time,
+        office,
+        category,
+        phone,
+        sex}
+    this.submit(data)
   },
+
   showPopup (e) {
     let id = e.target.id
     let obj = {}
@@ -126,6 +119,7 @@ Page({
       ...obj
     })
   },
+
   onClose () {
     let obj = {
       showTime: false,
@@ -137,8 +131,8 @@ Page({
       ...obj
     })
   },
+
   onConfirmFrom (e) {
-    console.log(e)
     const id = e.target.id
     let obj = {}
     if (id === 'timeFormat') {
@@ -169,18 +163,36 @@ Page({
     this.verifyFrom()
     this.onClose()
   },
+
   submit(data) {
     // 当然 promise 方式也是支持的
+    this.getUser(data.no, data)
+  },
+
+  getUser(no, data) {
     wx.cloud.callFunction({
-      name: 'add',
-      data
-    }).then(res=> {
-      console.log(res)
-      wx.showToast({
-        icon: 'success',
-        title: '添加成功~',
-      })
-      // this.triggerEvent('parentEvent', 1)
+      name: 'getUser'
+    }).then(res => {
+      let fdata = res.result.data
+      const resArr = fdata.filter(d => d.no === no).filter(d => d.status !== -1 && d.status !== 2)
+      if (resArr.length) {
+        wx.showToast({
+          icon: 'none',
+          title: '请勿重复预约~',
+        })
+        return
+      } else {
+        wx.cloud.callFunction({
+          name: 'add',
+          data
+        }).then(res => {
+          wx.showToast({
+            icon: 'success',
+            title: '预约成功~',
+          })
+          this.triggerEvent('parentEvent', 1)
+        })
+      }
     })
   }
 })

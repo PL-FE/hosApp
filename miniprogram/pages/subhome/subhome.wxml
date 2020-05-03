@@ -1,12 +1,14 @@
 
-<navbar activeName='{{activeName}}'/>
+<navbar activeName='{{activeName}}'>
+  <van-icon name="setting-o" bindtap="openSeting"/>
+</navbar>
 
-<scroll-view scroll-y="true" class="main-content">
+<scroll-view scroll-y="true" class="main-content" refresher-triggered="{{refreStatus}}" refresher-enabled="true" bindrefresherrefresh="handleRefresh">
   <block wx:if="{{active === 0}}">
     <appoint  bind:parentEvent='onChangeTabs'/>
   </block>
   <block wx:if="{{active > 0}}">
-    <history  />
+    <history  id="history"/>
   </block>
 </scroll-view>
 

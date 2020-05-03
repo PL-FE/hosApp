@@ -1,0 +1,5 @@
+<van-overlay show="{{ show }}" bind:click="onClickHide">
+   <view class="wrapper">
+    <van-loading  color="#1989fa" />
+  </view>
+</van-overlay>

@@ -4,4 +4,8 @@
   left-arrow
   safe-area-inset-top="{{ false }}"
   bind:click-left="onClickBack"
-/>
+>
+  <view slot="right">
+    <slot></slot>
+  </view>
+</van-nav-bar>

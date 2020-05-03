@@ -1,0 +1,41 @@
+.right_swipe {
+  display: inline-block;
+  width: 65px;
+  height: 82px;
+  font-size: 15px;
+  line-height: 82px;
+  color: #fff;
+  text-align: center;
+  background-color: #1989fa;
+}
+
+.cell {
+  vertical-align: middle;
+  background-color: #fff;
+  padding: var(--cell-vertical-padding, 10px)
+    var(--cell-horizontal-padding, 16px);
+}
+
+.icon {
+  height: 62px;
+  font-size: 15px;
+}
+
+.cell-btn {
+  line-height: 54px;
+  vertical-align: middle
+}
+
+.userInfo {
+  color: #6e6e6e;
+  font-size: 12px;
+}
+
+.info {
+  padding: 0 0 5px;
+}
+
+.item-body {
+  height: calc(100vh - 44px);
+  width: 100%;
+}

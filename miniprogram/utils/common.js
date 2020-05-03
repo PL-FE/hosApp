@@ -71,13 +71,7 @@ function echartlinefn (color, xAxis, data, sortype, tooltipName) {
     tooltip: {
       show: true,
       trigger: "axis",
-      // formatter: function (params) {
-      //   let tip = `${params[0].name}\n`;
-      //   for (let i = 0; i < params.length; i++) {
-      //     tip += `${params[i].value}`;
-      //   }
-      //   return tip
-      // }
+     
       formatter: function (params) {
         let tip = `${params[0].name}\n`;
         for (let i = 0; i < params.length; i++) {
@@ -175,15 +169,6 @@ function echartlinefn (color, xAxis, data, sortype, tooltipName) {
 }
 
 function echartPiefn(color, xAxis, data, sortype, tooltipName) {
-  //color:颜色, xAxis:x轴数据, data:数据, sortype:获取Y轴区间类型
-  // // y轴最小值
-  // let min = 0;
-  // // let min = Math.min(...hybridData(data, sortype));
-  // // y轴最大值
-  // let max = Math.max(...hybridData(data, sortype));
-  // max = max == 0 ? 4 : max
-  // // y轴刻度间隔
-  // let yInterval = max >= 4 ? parseInt((max - min) / 4) : 1;
   // 配置
   let option = {
     tooltip: {
@@ -197,7 +182,7 @@ function echartPiefn(color, xAxis, data, sortype, tooltipName) {
       //水平安放位置，默认为全图居中，可选为：'center' | 'left' | 'right' | {number}（x坐标，单位px）  
       x: 'right',
       //垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）  
-            y: '20px',
+      y: '20px',
     },
     grid: {
       left: '3%',
