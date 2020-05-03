@@ -1,6 +1,6 @@
 
 <navbar activeName='{{activeName}}'>
-  <van-icon name="setting-o" bindtap="openSeting"/>
+  <van-icon wx:if="{{active === 1}}" name="setting-o" bindtap="openSeting"/>
 </navbar>
 
 <scroll-view scroll-y="true" class="main-content" refresher-triggered="{{refreStatus}}" refresher-enabled="true" bindrefresherrefresh="handleRefresh">
@@ -8,7 +8,7 @@
     <appoint  bind:parentEvent='onChangeTabs'/>
   </block>
   <block wx:if="{{active > 0}}">
-    <history  id="history"/>
+    <history  id="history" bind:parentEvent='onDelete'/>
   </block>
 </scroll-view>
 
@@ -16,4 +16,19 @@
   <van-tabbar-item icon="home-o">预约</van-tabbar-item>
   <van-tabbar-item icon="search">历史</van-tabbar-item>
 </van-tabbar>
+
+<van-dialog use-slot title="验证"
+show="{{ showDialogAdmin }}"
+bind:confirm="checkAdminInfo"
+show-cancel-button>
+ <van-field
+    value="{{ pwd }}"
+    type="password"
+    bind:change="pwdChange"
+    placeholder="请输入管理员密码"
+    border="{{ true }}"
+  />
+</van-dialog>
+  <van-dialog id="van-dialog" />
+
 

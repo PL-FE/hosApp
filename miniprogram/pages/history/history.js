@@ -2,6 +2,7 @@
 const db = wx.cloud.database()
 const { times } = require('../../utils/util.js')
 
+
 Component({
 
   /**
@@ -59,21 +60,26 @@ Component({
         })
       })
     },
-    
+
     handleDelete(event) {
+      this.triggerEvent('parentEvent', event)
+    },
+
+    deleteItem(event) {
+      console.log(event)
       const vm = this
       wx.cloud.callFunction({
         name: 'deleteUser',
         data: {
-          id: event.target.id
+          id: event.detail.target.id
         }
       }).then(res => {
-          this.init()
-          wx.showToast({
-            icon: 'none',
-            title: '成功删除一条记录~',
-          })
-       })
+        this.init()
+        wx.showToast({
+          icon: 'none',
+          title: '😀 成功删除一条记录~',
+        })
+      })
     }
   }
  

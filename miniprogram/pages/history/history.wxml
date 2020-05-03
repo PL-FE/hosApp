@@ -25,5 +25,4 @@
   </van-swipe-cell>
 </view>
 
-
 <overlay id="overlay"/>

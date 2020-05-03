@@ -32,3 +32,4 @@
 </scroll-view>
 </view>
   <overlay id="overlay" />
+  <van-dialog id="van-dialog" />

@@ -1,6 +1,7 @@
 // pages/history/history.js
 const db = wx.cloud.database()
 const { times } = require('../../utils/util.js')
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 
 Page({
 
@@ -59,23 +60,46 @@ Page({
   },
 
   handlePass (event) {
-    console.log(event)
+    const vm = this
+    Dialog.confirm({
+      title: '确认',
+      message: '是否确认已到达？'
+    }).then(() => {
+      vm.passItem(event)
+    }).catch(() => {
+      // on cancel
+    });
+  },
+
+  passItem(event) {
     wx.cloud.callFunction({
       name: 'updateUser',
       data: {
         id: event.target.id,
-        status:2
+        status: 2
       }
     }).then(res => {
       this.init()
       wx.showToast({
         icon: 'none',
-        title: '操作成功~',
+        title: '😀 操作成功~',
       })
     })
   },
 
   handleDelete(event) {
+    Dialog.confirm({
+      context: this,
+      title: '确认',
+      message: '是否确认删除？'
+      }).then(() => {
+        this.deleteItem(event)
+      }).catch(() => {
+        // on cancel
+      });
+  },   
+
+  deleteItem(event) {
     const vm = this
     wx.cloud.callFunction({
       name: 'deleteUser',
@@ -83,12 +107,12 @@ Page({
         id: event.target.id
       }
     }).then(res => {
-        this.init()
-        wx.showToast({
-          icon: 'none',
-          title: '成功删除一条记录~',
-        })
+      this.init()
+      wx.showToast({
+        icon: 'none',
+        title: '😀 成功删除一条记录~',
       })
+    })
   },
 
   handleRefresh () {

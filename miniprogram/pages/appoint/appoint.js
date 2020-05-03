@@ -178,7 +178,7 @@ Page({
       if (resArr.length) {
         wx.showToast({
           icon: 'none',
-          title: '请勿重复预约~',
+          title: '🤦‍♂️ 请勿重复预约~',
         })
         return
       } else {
@@ -188,7 +188,7 @@ Page({
         }).then(res => {
           wx.showToast({
             icon: 'success',
-            title: '预约成功~',
+            title: '😀 预约成功~',
           })
           this.triggerEvent('parentEvent', 1)
         })
