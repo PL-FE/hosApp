@@ -9,13 +9,15 @@ exports.main = async (event, context) => {
   const db = cloud.database()
   const user = db.collection('user')
   const {status} = event
-  let obj = {}
-  if (status !== 'all') {
-    let obj = { createUser: OPENID}
+  let result = []
+  if (status) {
+    result = await user.orderBy('time', 'desc').where({
+    }).get()
+  } else {
+    result = await user.orderBy('time', 'desc').where({
+      createUser: OPENID
+    }).get()
   }
-  let result = await user.orderBy('time', 'desc').where({
-    ...obj
-  }).get()
   let data = result.data
 
   const newTime = new Date().valueOf()
