@@ -1,5 +1,6 @@
 const gradeInfo = ['大一', '大二', '大三', '大四', '其他']
 const departmentInfo = {
+  
   "地球科学学院": [
     "资源勘查工程",
     "勘查技术与工程",
@@ -83,8 +84,8 @@ const departmentInfo = {
 }
 
 const officeInfo = ['内科', '外科', '五官科', '牙科', '其他']
-const categoryInfo = ['感冒', '肚子不舒服', '头晕', '发烧', '其他']
-
+// const categoryInfo = ['感冒', '肚子不舒服', '头晕', '发烧', '其他']
+const categoryInfo = ['受伤', '感冒发烧', '胃痛', '喉咙痛', '肚子疼', '头晕', '牙疼', '皮肤病', '其他']
 module.exports = {
   gradeInfo,
   departmentInfo,

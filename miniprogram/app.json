@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/subhome/subhome",
-    "pages/admin/admin",
     "pages/home/home",
+    "pages/subhome/subhome",
     "pages/datacharts/datacharts",
     "pages/history/history",
+    "pages/admin/admin",
     "pages/appoint/appoint",
     "components/navbar/navbar"
   ],

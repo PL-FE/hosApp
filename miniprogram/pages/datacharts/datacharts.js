@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-import { echartlinefn, init, hybridData, echartPiefn } from '../../utils/common';
+import { echartlinefn, init, hybridData, echartPiefn, echartBarfn } from '../../utils/common';
 const db = wx.cloud.database()
 const { times } = require('../../utils/util.js')
 
@@ -11,7 +11,7 @@ Page({
       // 将 lazyLoad 设为 true 后，需要手动初始化图表
       lazyLoad: true,
     },
-    color: '##557bd9',
+    color: '#2f4554',
     userList: []
   },
 
@@ -22,7 +22,10 @@ Page({
 
   init() {
     wx.cloud.callFunction({
-      name: 'getUser'
+      name: 'getUser',
+      data: {
+        status: 'all'
+      }
     }).then(res => {
       this.selectComponent('#overlay').onClickHide()
       let data = res.result.data
@@ -31,7 +34,7 @@ Page({
         it.createTime = times(it.createTime)
       })
       this.setData({
-        userList: data
+        userList: data.reverse()
       })
 
       this.init1()
@@ -45,6 +48,16 @@ Page({
       echartlinefn(
         this.data.color,
         hybridData(this.data.userList, 'time'),
+        this.data.userList,
+        'countActivate',
+        '人数'
+      )
+    );
+    init(
+      this.selectComponent('#ec_bar'),
+      echartBarfn(
+        this.data.color,
+        hybridData(this.data.userList, 'department'),
         this.data.userList,
         'countActivate',
         '人数'

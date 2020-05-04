@@ -188,7 +188,7 @@ Page({
         }).then(res => {
           wx.showToast({
             icon: 'success',
-            title: '😀 预约成功~',
+            title: '预约成功~',
           })
           this.triggerEvent('parentEvent', 1)
         })

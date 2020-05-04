@@ -3,7 +3,7 @@
   <van-icon wx:if="{{active === 1}}" name="setting-o" bindtap="openSeting"/>
 </navbar>
 
-<scroll-view scroll-y="true" class="main-content" refresher-triggered="{{refreStatus}}" refresher-enabled="true" bindrefresherrefresh="handleRefresh">
+<scroll-view scroll-y="true" class="main-content" refresher-triggered="{{refreStatus}}" refresher-enabled="{{active === 1}}" bindrefresherrefresh="handleRefresh">
   <block wx:if="{{active === 0}}">
     <appoint  bind:parentEvent='onChangeTabs'/>
   </block>

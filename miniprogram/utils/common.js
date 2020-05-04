@@ -46,19 +46,29 @@ function hybridData(data, type) {
 }
 //画图
 function echartlinefn (color, xAxis, data, sortype, tooltipName) {
+  xAxis = xAxis.map(it => it.split(' ')[0])
+  const res = xAxis.reduce((prev, curr)=> {
+    if (curr in prev) {
+      prev[curr]++;
+    } else {
+      prev[curr] = 1;
+    }
+    return prev;
+  },{})
+  xAxis = Object.keys(res)
   //color:颜色, xAxis:x轴数据, data:数据, sortype:获取Y轴区间类型
   // y轴最小值
   let min = 0;
   // let min = Math.min(...hybridData(data, sortype));
   // y轴最大值
-  let max = Math.max(...hybridData(data, sortype));
+  let max = Math.max(...Object.values(res));
   max = max == 0 ? 4 : max
   // y轴刻度间隔
   let yInterval = max >= 4 ? parseInt((max - min) / 4) : 1;
   // 配置
   let option = {
     // 折线图颜色
-    color: color,
+    color: 'red',
     // grid 为直角坐标系内绘图网格,控制图表摆放位置上
     grid: {
       top: '4%',
@@ -73,6 +83,7 @@ function echartlinefn (color, xAxis, data, sortype, tooltipName) {
       trigger: "axis",
      
       formatter: function (params) {
+        console.log(params)
         let tip = `${params[0].name}\n`;
         for (let i = 0; i < params.length; i++) {
           tip += `{marker${params[i].seriesIndex}at0|} ${params[i].seriesName}: ${params[i].value}\n`;
@@ -151,15 +162,16 @@ function echartlinefn (color, xAxis, data, sortype, tooltipName) {
       type: 'line',
       smooth: true,
       color: ['#4EBADB'],
-      data: hybridData(data, sortype),
+      data: Object.values(res),
       itemStyle: {
         normal: { 
-          color: '#4EBADB',
-          borderColor: '#4EBADB',
+          color: '#2f4554',
+          borderColor: '#2f4554',
           // label: { show: true },
           lineStyle: {
             width: 2,
-            type: 'solid'  //'dotted'虚线 'solid'实线
+            type: 'solid',  //'dotted'虚线 'solid'实线
+            color: '#2f4554'
           }
         }
       }
@@ -168,7 +180,12 @@ function echartlinefn (color, xAxis, data, sortype, tooltipName) {
   return option
 }
 
-function echartPiefn(color, xAxis, data, sortype, tooltipName) {
+function echartBarfn(color, xAxis, data, sortype, tooltipName) {
+  xAxis[0].push(xAxis[0].reduce((p, c) => p + c, 0))
+  xAxis[1].push(xAxis[1].reduce((p, c) => p + c, 0))
+  console.log(xAxis)
+  const yData = Object.keys(departmentInfo)
+  yData.push('总人数')
   // 配置
   let option = {
     tooltip: {
@@ -179,7 +196,6 @@ function echartPiefn(color, xAxis, data, sortype, tooltipName) {
     },
     legend: {
       data: ['女', '男'],
-      //水平安放位置，默认为全图居中，可选为：'center' | 'left' | 'right' | {number}（x坐标，单位px）  
       x: 'right',
       //垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）  
       y: '20px',
@@ -199,7 +215,7 @@ function echartPiefn(color, xAxis, data, sortype, tooltipName) {
     },
     yAxis: {
       type: 'category',
-      data: Object.keys(departmentInfo),
+      data: yData,
       // x轴线
       axisLine: {
         show: false, //是否显示x轴线
@@ -235,7 +251,52 @@ function echartPiefn(color, xAxis, data, sortype, tooltipName) {
       }
     ]
   }
-  console.log(xAxis)
+  return option
+}
+
+function echartPiefn(color, xAxis, data, sortype, tooltipName) {
+  // 配置
+  const led = categoryInfo
+  let categoryres = data.map(it => it.category).reduce((pre, cur)=>{
+    pre[cur] = pre[cur] ? pre[cur] + 1 : 1
+    return pre
+  },{})
+  let resData = []
+  Object.entries(categoryres).forEach(it => {
+    resData.push({
+      name: it[0],
+      value: it[1]
+    })
+  })
+  let option = {
+    tooltip: {
+      trigger: 'item',
+      formatter: `{a} \n{b} : {c} ({d}%)`
+    },
+    legend: {
+      orient: 'horizontal',
+      left: 'center',
+      y: '20px',
+      data: categoryInfo
+    },
+    series: [
+      {
+        name: '类型',
+        type: 'pie',
+        radius: '55%',
+        center: ['50%', '60%'],
+        data: resData,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  };
+
   return option
 }
 
@@ -243,5 +304,6 @@ export {
   echartlinefn,
   init,
   hybridData,
-  echartPiefn
+  echartPiefn,
+  echartBarfn
 }

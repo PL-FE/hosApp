@@ -77,7 +77,7 @@ Component({
         this.init()
         wx.showToast({
           icon: 'none',
-          title: '😀 成功删除一条记录~',
+          title: '成功删除一条记录~',
         })
       })
     }

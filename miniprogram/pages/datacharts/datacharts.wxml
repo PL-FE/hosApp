@@ -5,7 +5,7 @@
 
 <view class="dataBody">
   <view class="body">
-    <text class="title">不同时间段预约情况图</text>
+    <text class="title">时间段预约情况图</text>
     <view class="chart-line">
       <ec-canvas id="ec_line" canvas-id="ec_line" ec="{{ ec }}">
       </ec-canvas>
@@ -15,6 +15,14 @@
   <view class="body">
     <text class="title legend">各学院预约情况图</text>
     <view class="chart-line" style="height:500px;">
+      <ec-canvas id="ec_bar" canvas-id="ec_bar" ec="{{ ec }}">
+      </ec-canvas>
+    </view>
+  </view>
+
+  <view class="body">
+    <text class="title legend">病类占比图</text>
+    <view class="chart-line" style="height:350px;">
       <ec-canvas id="ec_pie" canvas-id="ec_pie" ec="{{ ec }}">
       </ec-canvas>
     </view>
