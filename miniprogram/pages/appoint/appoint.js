@@ -17,6 +17,7 @@ Page({
     categoryInfo: categoryInfo,
     officeInfo: officeInfo,
     checkPhone: '',
+    checkNo: '',
     showTime: false,
     showOffice: false,
     showCategory: false,
@@ -25,14 +26,8 @@ Page({
     minHour: 10,
     maxHour: 20,
     minDate: new Date().getTime(),
-    maxDate: new Date(2021, 10, 1).getTime(),
+    maxDate: new Date().getTime() + 604800000,
     currentDate: new Date().getTime(),
-    filter(type, options) {
-      if (type === 'minute') {
-        return options.filter(option => option % 30 === 0)
-      }
-      return options;
-    },
     departmentList: [
       {
         values: Object.keys(departmentInfo),
@@ -70,6 +65,24 @@ Page({
     if (name && no && department && phone && time && office.length && category.length) {
       disabled = false
     }
+
+    if (no.length >= 8 && no.length <= 13) {
+      this.setData({
+        checkNo: ''
+      });
+    }
+    
+    if (phone) {
+      // 手机号的校验 
+      const pattern = /(13\d|14[579]|15[^4\D]|17[^49\D]|18\d)\d{8}/g;
+      const str = phone;
+      if (pattern.test(str)) {
+        this.setData({
+          checkPhone: ''
+        });
+      }
+    }
+
     this.setData({
       disabled
     })
@@ -94,7 +107,33 @@ Page({
         category,
         phone,
         sex}
-    this.submit(data)
+    let pass = true
+    if (no) {
+      // 学号的校验
+      if (no.length < 8 || no.length > 13) {
+        this.setData({
+          checkNo: '学号长度为8 ~ 13'
+        });
+        pass = false
+      }
+    }
+
+    if (phone) {
+      // 手机号的校验 
+      const pattern = /(13\d|14[579]|15[^4\D]|17[^49\D]|18\d)\d{8}/g;
+      const str = phone;
+      if (!pattern.test(str)) {
+        this.setData({
+          checkPhone: '手机号格式错误'
+        });
+        pass = false
+      }
+    }
+
+    if (pass) {
+      this.submit(data)
+    }
+      
   },
 
   showPopup (e) {
@@ -134,29 +173,21 @@ Page({
 
   onConfirmFrom (e) {
     const id = e.target.id
+      console.log(e)
+    wx.closeBLEConnection({
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
     let obj = {}
     if (id === 'timeFormat') {
       obj.time = e.detail.value || e.detail
       obj[id] = e.detail.value || times(e.detail)
-    } else if (id === 'phone') {
-      this.setData({
-        checkPhone: ''
-      });
-      var pattern = /(13\d|14[579]|15[^4\D]|17[^49\D]|18\d)\d{8}/g;
-      var str = e.detail.value;
-      if (pattern.test(str)) {
-        obj[id] = e.detail.value
-      } else {
-        if (e.detail.value) {
-        this.setData({
-          checkPhone: '手机号格式错误'
-        });
-        }
-        return
-      }
-    } else {
+    } else {e.detail.value
       obj[id] = e.detail.value || e.detail
     }
+    console.log(obj)
+    obj[id] = obj[id].value === '' ? '' : obj[id]
     this.setData({
       ...obj
     });
@@ -170,6 +201,7 @@ Page({
   },
 
   getUser(no, data) {
+    const vm = this
     wx.cloud.callFunction({
       name: 'getUser'
     }).then(res => {
@@ -181,18 +213,36 @@ Page({
           title: '🤦‍♂️ 请勿重复预约~',
         })
         return
+      }
+      const count = fdata.filter(it => it.time <= data.time + 1800000 && it.time >= data.time - 1800000)
+      if (count.length < 6) {
+        vm.add(data)
       } else {
-        wx.cloud.callFunction({
+        wx.showModal({
+          title: '提示',
+          content: '预约人数大于5，是否继续？',
+          success(res) {
+            if (res.confirm) {
+              vm.add(data)
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
+        
+    })
+  },
+  add (data) {
+    wx.cloud.callFunction({
           name: 'add',
           data
         }).then(res => {
           wx.showToast({
-            icon: 'success',
-            title: '预约成功~',
+            icon: 'none',
+            title: '预约成功~30分钟内有效！',
           })
           this.triggerEvent('parentEvent', 1)
         })
-      }
-    })
   }
 })

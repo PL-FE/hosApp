@@ -12,7 +12,8 @@ Page({
       lazyLoad: true,
     },
     color: '#2f4554',
-    userList: []
+    userList: [],
+    scrollText: ""
   },
 
   onLoad () {
@@ -29,16 +30,16 @@ Page({
     }).then(res => {
       this.selectComponent('#overlay').onClickHide()
       let data = res.result.data
-      data.forEach(it => {
+      let twoWeekData = data.filter(it => it.time > new Date().getTime() - 604800000 && it.time < new Date().getTime() + 604800000)
+      twoWeekData.forEach(it => {
         it.time = times(it.time)
         it.createTime = times(it.createTime)
       })
       this.setData({
-        userList: data.reverse()
+        userList: twoWeekData.reverse()
       })
 
       this.init1()
-      
     })
   },
   

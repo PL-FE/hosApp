@@ -17,11 +17,12 @@
      />
     <van-field icon="hotel-o"
       bind:clear="onConfirmFrom"
-      bind:change="onConfirmFrom"
+      bind:blur="onConfirmFrom"
       id="no"
       value="{{ no }}"
       label="学号"
       clearable
+      error-message="{{checkNo}}"
       placeholder="请输入学号" />
 
       <van-cell title="性别" title-width="90px" >
@@ -60,6 +61,7 @@
         id="timeFormat"
         value="{{ currentDate }}"
         min-date="{{ minDate }}"
+        max-date="{{ maxDate }}"
         bind:confirm="onConfirmFrom" 
         bind:cancel="onClose"
       />

@@ -37,6 +37,9 @@ exports.main = async (event, context) => {
         it.status = 1
       }
     }
+  })
+
+  data.forEach(it => {
     // 区间重叠算法
     // 1、Begin = Max(A1, B1);
     // 2、End = Min(A2, B2);
@@ -49,7 +52,8 @@ exports.main = async (event, context) => {
       const eTime = s.time + 1800000
       const Begin = Math.max(startTime, sTime)
       const End = Math.min(endTime, eTime)
-      if (End - Begin > 0) {
+      const yx = s.status === 0 || s.status === 1
+      if (End - Begin > 0 && yx) {
         it.countActivate = it.countActivate ? it.countActivate + 1 : 1
       }
     })

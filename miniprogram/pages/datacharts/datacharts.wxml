@@ -2,6 +2,10 @@
 <view class="navbarStyle">
   <navbar activeName='数据' />
 </view>
+<van-notice-bar
+  scrollable="true"
+  text="{{scrollText}}"
+/>
 
 <view class="dataBody">
   <view class="body">
