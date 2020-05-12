@@ -83,7 +83,6 @@ function echartlinefn (color, xAxis, data, sortype, tooltipName) {
       trigger: "axis",
      
       formatter: function (params) {
-        console.log(params)
         let tip = `${params[0].name}\n`;
         for (let i = 0; i < params.length; i++) {
           tip += `{marker${params[i].seriesIndex}at0|} ${params[i].seriesName}: ${params[i].value}\n`;
@@ -183,7 +182,6 @@ function echartlinefn (color, xAxis, data, sortype, tooltipName) {
 function echartBarfn(color, xAxis, data, sortype, tooltipName) {
   xAxis[0].push(xAxis[0].reduce((p, c) => p + c, 0))
   xAxis[1].push(xAxis[1].reduce((p, c) => p + c, 0))
-  console.log(xAxis)
   const yData = Object.keys(departmentInfo)
   yData.push('总人数')
   // 配置
