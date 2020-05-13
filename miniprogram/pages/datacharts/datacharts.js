@@ -71,27 +71,47 @@ Page({
   },
   initScrollText (data) {
     // TODO: 过滤到昨天
+    const today = times(new Date().getTime())
     // 计算性别
     const sex0 = data.map(it => it.sex).filter(it => it === '0')
     const sex1 = data.map(it => it.sex).filter(it => it === '1')
-
+    // 选出昨天和今天的数据
+    const yesterdayCount = data.filter(it => it.time.split(' ')[0] === times(new Date().getTime() - 86400000).split(' ')[0])
+    const todayCount = data.filter(it => it.time.split(' ')[0] === times(new Date().getTime()).split(' ')[0])
+    // 计算出今天的前三
+    const categoryTodayCount = this.count(todayCount.map(it => it.category))
+    console.log(categoryTodayCount)
+    let arr = Object.entries(categoryTodayCount).sort((a, b) => b[1] - a[1])
+    console.log(arr)
+    let strcategoryTodayCount = `"${arr[0]}"、"${arr[1]}"、"${arr[2]}"`
+    console.log(strcategoryTodayCount)
     // 计算学院
     const maxDepartmentData = this.count(data.map(it => it.department[0]))
-    let maxdepartment = this.getMax('department', maxDepartmentData)
+    arr = Object.entries(maxDepartmentData).sort((a, b) => b[1] - a[1])
+    let strDepartment = ''
+    arr.forEach(it => {
+      strDepartment = strDepartment + `${it[0]} 占 ${(it[1] * 100 / data.length).toFixed(2)}%，`
+    })
+    console.log(data)
+    // let maxdepartment = this.getMax('department', maxDepartmentData)
     // 计算病类
     const maxCategoryData = this.count(data.map(it => it.category))
-    let maxCategory = this.getMax('category', maxCategoryData)
+    // let maxCategory = this.getMax('category', maxCategoryData)
+    arr = Object.entries(maxCategoryData).sort((a, b) => b[1] - a[1])
+    let strCategory = ''
+    strCategory = `"${arr[0][0]}"、"${arr[1][0]}"、"${arr[2][0]}"`
     // 计算预约最多的日期
     const maxTimeData = this.count(data.map(it => it.time.split(' ')[0]))
     let maxTime = this.getMax('time', maxTimeData)
 
-    const scrollText = `截至 ${times(new Date().getTime())}，
+    const scrollText = `截至 ${today}，
     总共有${data.length}人预约，
     其中，男生${sex0.length}人，
     女生${sex1.length}人，
-    ${maxdepartment}预约人数最多占${(maxDepartmentData[maxdepartment] * 100/ data.length).toFixed(2)}%，
-    ${maxCategory}的人数较多，
-    于${maxTime }预约人数最多。`
+    ${strDepartment}
+    出现 ${strCategory}的病情较多，
+    于${maxTime}预约人数最多，
+    相较于昨天，今天预约新增共${todayCount.length - yesterdayCount.length}人`
     this.setData({
       scrollText
     })
