@@ -78,13 +78,7 @@ Page({
     // 选出昨天和今天的数据
     const yesterdayCount = data.filter(it => it.time.split(' ')[0] === times(new Date().getTime() - 86400000).split(' ')[0])
     const todayCount = data.filter(it => it.time.split(' ')[0] === times(new Date().getTime()).split(' ')[0])
-    // 计算出今天的前三
-    const categoryTodayCount = this.count(todayCount.map(it => it.category))
-    console.log(categoryTodayCount)
-    let arr = Object.entries(categoryTodayCount).sort((a, b) => b[1] - a[1])
-    console.log(arr)
-    let strcategoryTodayCount = `"${arr[0]}"、"${arr[1]}"、"${arr[2]}"`
-    console.log(strcategoryTodayCount)
+    
     // 计算学院
     const maxDepartmentData = this.count(data.map(it => it.department[0]))
     arr = Object.entries(maxDepartmentData).sort((a, b) => b[1] - a[1])
