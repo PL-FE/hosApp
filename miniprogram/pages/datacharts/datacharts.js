@@ -78,10 +78,9 @@ Page({
     // 选出昨天和今天的数据
     const yesterdayCount = data.filter(it => it.time.split(' ')[0] === times(new Date().getTime() - 86400000).split(' ')[0])
     const todayCount = data.filter(it => it.time.split(' ')[0] === times(new Date().getTime()).split(' ')[0])
-    
     // 计算学院
     const maxDepartmentData = this.count(data.map(it => it.department[0]))
-    arr = Object.entries(maxDepartmentData).sort((a, b) => b[1] - a[1])
+    let arr = Object.entries(maxDepartmentData).sort((a, b) => b[1] - a[1])
     let strDepartment = ''
     arr.forEach(it => {
       strDepartment = strDepartment + `${it[0]} 占 ${(it[1] * 100 / data.length).toFixed(2)}%，`
