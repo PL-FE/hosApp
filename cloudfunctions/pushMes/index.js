@@ -14,13 +14,7 @@ exports.main = async (event, context) => {
   //   unionid: wxContext.UNIONID,
   // }
   let { name,
-    no,
-    department,
-    time,
-    office,
-    category,
-    phone,
-    sex } = event
+    time} = event
 
   const result = await cloud.openapi.subscribeMessage.send({
     touser: wxContext.OPENID,

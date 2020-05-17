@@ -23,6 +23,7 @@ Page({
     showCategory: false,
     showDepartment: false,
     disabled: true,
+    isSendMes: false,
     minHour: 10,
     maxHour: 20,
     minDate: new Date().getTime(),
@@ -138,7 +139,16 @@ Page({
     }
 
     if (pass) {
-      this.submit(data)
+      const vm = this
+      wx.requestSubscribeMessage({
+        tmplIds: ['eB3bNOUJAqHlROQvc-UBrpczSGFR_I2yS4CGE-t40g8'], // 此处可填写多个模板 ID，但低版本微信不兼容只能授权一个
+        success (res) {
+          vm.setData({
+            isSendMes: true
+          })
+          vm.submit(data)
+        }
+      })
     }
       
   },
@@ -229,7 +239,6 @@ Page({
           success(res) {
             if (res.confirm) {
               vm.add(data)
-              vm.sendMes(data)
             } else if (res.cancel) {
               console.log('用户点击取消')
             }
@@ -241,16 +250,11 @@ Page({
   },
 
   sendMes (data) {
-    wx.requestSubscribeMessage({
-      tmplIds: ['eB3bNOUJAqHlROQvc-UBrpczSGFR_I2yS4CGE-t40g8'], // 此处可填写多个模板 ID，但低版本微信不兼容只能授权一个
-      success (res) {
-        wx.cloud.callFunction({
-          name: 'pushMes',
-          data: {
-            time: times(data.time),
-            name: data.name
-          }
-        })
+    wx.cloud.callFunction({
+      name: 'pushMes',
+      data: {
+        time: times(data.time),
+        name: data.name
       }
     })
   },
@@ -263,6 +267,9 @@ Page({
             icon: 'none',
             title: '预约成功~30分钟内有效！',
           })
+          if (this.data.isSendMes) {
+            this.sendMes(data)
+          }
           this.triggerEvent('parentEvent', 1)
         })
   }
