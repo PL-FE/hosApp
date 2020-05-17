@@ -49,10 +49,9 @@
       <van-cell value="{{ office }}" title-width="90px" label="科室" id="office" is-link bind:click="showPopup" />
       <van-cell value="{{ category }}" title-width="90px" label="病类" id="category" is-link bind:click="showPopup" />
 
-      <van-button type="primary " bind:click="formSubmit" color="#66CDAA " round="true " class="center" disabled="{{disabled}}" >
+      <van-button form-type="submit" type="primary " bind:click="formSubmit" color="#66CDAA " round="true " class="center" disabled="{{disabled}}" >
         确认预约
       </van-button>
-
 
       </van-cell-group>
       <popup isShow="{{ showTime }}">

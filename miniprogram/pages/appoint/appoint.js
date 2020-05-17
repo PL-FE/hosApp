@@ -116,6 +116,13 @@ Page({
         });
         pass = false
       }
+      const reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
+  　　if(reg.test(no)){
+        this.setData({
+          checkNo: '学号类型不正确！'
+        });
+        pass = false
+      }
     }
 
     if (phone) {
@@ -173,7 +180,6 @@ Page({
 
   onConfirmFrom (e) {
     const id = e.target.id
-      console.log(e)
     wx.closeBLEConnection({
       success: function(res) {},
       fail: function(res) {},
@@ -186,7 +192,6 @@ Page({
     } else {e.detail.value
       obj[id] = e.detail.value || e.detail
     }
-    console.log(obj)
     obj[id] = obj[id].value === '' ? '' : obj[id]
     this.setData({
       ...obj
@@ -224,6 +229,7 @@ Page({
           success(res) {
             if (res.confirm) {
               vm.add(data)
+              vm.sendMes(data)
             } else if (res.cancel) {
               console.log('用户点击取消')
             }
@@ -231,6 +237,21 @@ Page({
         })
       }
         
+    })
+  },
+
+  sendMes (data) {
+    wx.requestSubscribeMessage({
+      tmplIds: ['eB3bNOUJAqHlROQvc-UBrpczSGFR_I2yS4CGE-t40g8'], // 此处可填写多个模板 ID，但低版本微信不兼容只能授权一个
+      success (res) {
+        wx.cloud.callFunction({
+          name: 'pushMes',
+          data: {
+            time: times(data.time),
+            name: data.name
+          }
+        })
+      }
     })
   },
   add (data) {

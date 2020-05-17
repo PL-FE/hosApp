@@ -7,7 +7,7 @@
       <van-col span="3">
         <van-icon color="#0af" size="20" class="icon" name="user-o" />
       </van-col>
-      <van-col span="16" class="userInfo">
+      <van-col span="11" class="userInfo">
         <view class="info">{{item.no}}</view>
         <view class="info">{{item.name}}</view>
         <view class="info" style="padding: 0;">{{item.time}}</view>
@@ -16,6 +16,11 @@
         <van-icon wx:if="{{item.status === -1}}" size="40" class="icon"  name="cloud://dev-s2bhf.6465-dev-s2bhf-1301968054/已失效.png" />
         <text wx:elif="{{item.status === 1 || item.status === 0}}" class="iconText">共{{item.countActivate}}人</text>
          <van-icon wx:elif="{{item.status === 2}}" size="40" class="icon" name="cloud://dev-s2bhf.6465-dev-s2bhf-1301968054/已完成.png" />
+      </van-col>
+      <van-col span="2">
+          <van-button wx:if="{{item.status === 1 || item.status === 0}}" id="{{item._id}}" size="mini" type="primary" class="cell-btn" bindtap="handlePass">到 达</van-button>
+      </van-col>
+      <van-col span="3">
       </van-col>
     </van-row>
       

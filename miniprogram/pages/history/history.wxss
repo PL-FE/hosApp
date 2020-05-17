@@ -16,6 +16,11 @@
   padding:var(--cell-vertical-padding,10px) var(--cell-horizontal-padding,16px);
 }
 
+.cell-btn {
+  line-height: 54px;
+  vertical-align: middle
+}
+
 .icon {
   height: 62px;
   font-size: 15px;

@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/datacharts/datacharts",
     "pages/subhome/subhome",
+    "pages/datacharts/datacharts",
     "pages/home/home",
     "pages/history/history",
     "pages/admin/admin",
@@ -12,7 +12,7 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#4F4F4F",
-    "navigationBarTitleText": "校医院预约小助手",
+    "navigationBarTitleText": "Hos预约小助手",
     "navigationBarTextStyle": "white"
   },
   "sitemapLocation": "sitemap.json",

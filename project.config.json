@@ -2,10 +2,11 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
@@ -22,7 +23,7 @@
 			"outputPath": ""
 		}
 	},
-	"appid": "wx95bf31571c02f26e",
+	"appid": "wxf53d38ff9781d7b4",
 	"projectname": "HosApp",
 	"libVersion": "2.11.0",
 	"simulatorType": "wechat",

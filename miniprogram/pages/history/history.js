@@ -64,6 +64,40 @@ Component({
     handleDelete(event) {
       this.triggerEvent('parentEvent', event)
     },
+    // 调用相机API,获取二维码内容，如果是ok则到达成功，反之返回到达失败！
+    // 预定好预约到达的暗号是 'ok'
+    handlePass (e) {
+      const vm = this
+      wx.scanCode({
+        success (res) {
+          console.log(res)
+          if (res.result === 'ok') {
+            vm.passItem(e.target.id)
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '到达失败！ ',
+            })
+          }
+        }
+      })
+    },
+
+    passItem (id) {
+      wx.cloud.callFunction({
+        name: 'updateUser',
+        data: {
+          id:id,
+          status: 2
+        }
+      }).then(res => {
+        this.init()
+        wx.showToast({
+          icon: 'none',
+          title: '操作成功~',
+        })
+      })
+    },
 
     deleteItem(event) {
       console.log(event)

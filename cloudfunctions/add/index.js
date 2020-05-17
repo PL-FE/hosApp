@@ -11,13 +11,7 @@ exports.main = async (event, context) => {
     createUser: OPENID, // 用 {openid} 变量，后台会自动替换为当前用户 openid
   }
   let { name,
-        no,
-        department,
-        time,
-        office,
-        category,
-        phone,
-        sex } = event
+        time } = event
 
 
   const db = cloud.database()
