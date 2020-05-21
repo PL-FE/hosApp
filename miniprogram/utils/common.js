@@ -45,7 +45,8 @@ function hybridData(data, type) {
   return arr;
 }
 //画图
-function echartlinefn (color, xAxis, data, sortype, tooltipName) {
+function echartlinefn (xAxis,tooltipName) {
+  // 处理数据，只展示年月日，不要时分秒
   xAxis = xAxis.map(it => it.split(' ')[0])
   const res = xAxis.reduce((prev, curr)=> {
     if (curr in prev) {
@@ -59,7 +60,6 @@ function echartlinefn (color, xAxis, data, sortype, tooltipName) {
   //color:颜色, xAxis:x轴数据, data:数据, sortype:获取Y轴区间类型
   // y轴最小值
   let min = 0;
-  // let min = Math.min(...hybridData(data, sortype));
   // y轴最大值
   let max = Math.max(...Object.values(res));
   max = max == 0 ? 4 : max
@@ -179,9 +179,11 @@ function echartlinefn (color, xAxis, data, sortype, tooltipName) {
   return option
 }
 
-function echartBarfn(color, xAxis, data, sortype, tooltipName) {
+function echartBarfn(xAxis) {
+  // 处理数据 分开男女
   xAxis[0].push(xAxis[0].reduce((p, c) => p + c, 0))
   xAxis[1].push(xAxis[1].reduce((p, c) => p + c, 0))
+  // 自己增加多一项-总人数
   const yData = Object.keys(departmentInfo)
   yData.push('总人数')
   // 配置
@@ -252,9 +254,10 @@ function echartBarfn(color, xAxis, data, sortype, tooltipName) {
   return option
 }
 
-function echartPiefn(color, xAxis, data, sortype, tooltipName) {
+function echartPiefn(data) {
   // 配置
   const led = categoryInfo
+  // 自己计算每个病类有几个人
   let categoryres = data.map(it => it.category).reduce((pre, cur)=>{
     pre[cur] = pre[cur] ? pre[cur] + 1 : 1
     return pre

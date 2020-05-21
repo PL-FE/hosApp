@@ -1,4 +1,4 @@
-// miniprogram/pages/home.js
+// 首页 第一个页面
 Page({
 
   /**
@@ -10,13 +10,14 @@ Page({
     },
   },
   
+  // 跳转到预约页面 subhome是预约页面的布局
   handleAppoint () {
       wx.navigateTo({
         url: '../subhome/subhome'
       })
       return
   },
-
+  // 跳转到数据分析页面
   handleCharts () {
       wx.navigateTo({
         url: '../datacharts/datacharts'

@@ -1,7 +1,7 @@
 
 const activeName = ['预约', '历史']
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
-
+// 包含预约页和历史页的一个容器
 Page({
   data: {
     active: 0,
@@ -11,10 +11,12 @@ Page({
     pwd: ''
   },
 
+  // 点击底部操作栏触发的方法
   onChangeTabs(event) {
     this.setData({ active: event.detail, activeName: activeName[event.detail] });
   },
 
+  // 这个方法是给子组件用的
   onDelete(event) {
     console.log(event)
     const vm = this
@@ -29,6 +31,7 @@ Page({
    
   },
 
+  // 统一的返回，这里写死是首页
   onClickBack() {
     wx.navigateTo({
       url: '/pages/home/home',
@@ -37,6 +40,7 @@ Page({
     wx.showToast({ title: '点击返回', icon: 'none' });
   },
   
+  // 打开管理员设置
   openSeting(e) {
     this.setData({
       pwd: '',
@@ -47,7 +51,9 @@ Page({
     // })
   },
 
+  // 刷新
   handleRefresh (e) {
+    // 判断在哪个页面的刷新，再去调相关页面的刷新方法
     if (this.data.active === 1) {
       this.selectComponent('#history').refresh(()=> {
         this.setData({
@@ -61,12 +67,7 @@ Page({
     }
   },
 
-  closeDialogAdmin () {
-    this.setData({
-      // showDialogAdmin: false
-    })
-  },
-
+  // 检查管理员面对不对
   checkAdminInfo (e) {
     wx.cloud.callFunction({
       name: 'getAdmin',
@@ -74,6 +75,7 @@ Page({
         pwd: this.data.pwd
       }
     }).then(res => {
+      // 对了就让进来
       if (res.result) {
         wx.navigateTo({
           url: '/pages/admin/admin',

@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/subhome/subhome",
-    "pages/datacharts/datacharts",
     "pages/home/home",
+    "pages/datacharts/datacharts",
+    "pages/subhome/subhome",
     "pages/history/history",
     "pages/admin/admin",
     "pages/appoint/appoint",

@@ -29,21 +29,26 @@ Page({
     }).then(res => {
       this.selectComponent('#overlay').onClickHide()
       let data = res.result.data
+      // 过滤出最近上一周和下一周的预约数据
       let twoWeekData = data.filter(it => it.time > new Date().getTime() - 604800000 && it.time < new Date().getTime() + 604800000)
+      // 做一下时间格式转换
       twoWeekData.forEach(it => {
         it.time = times(it.time)
         it.createTime = times(it.createTime)
       })
+      // 时间换一下顺序，新的时间在后面
       const userList = twoWeekData.reverse()
+      // 初始化滚动文字
       this.initScrollText(userList)
       this.setData({
         userList
       })
-
+      // 初始化图表
       this.init1()
     })
   },
 
+  // 传入数据，计算数据中每一项出现的次数，如xx学院出现了几次，展示用
   count (data) {
     return data.reduce(function (allNames, name) {
       if (name in allNames) {
@@ -56,7 +61,8 @@ Page({
     }, {});
 
   },
-
+  // 传入一个字段，和数据
+  // 找出该数据中，哪个字段的值最大
   getMax(fieId, maxData){
     let max = 0
     let maxFieId
@@ -70,15 +76,19 @@ Page({
     return maxFieId
   },
   initScrollText (data) {
-    // TODO: 过滤到昨天
+    // 计算出当前的时间，拿去显示
     const today = times(new Date().getTime())
-    // 计算性别
+    // 计算性别，拿去显示
+    // 从数据中取出 sex，并分出来男女
+    // sex0 男
+    // sex1 女
     const sex0 = data.map(it => it.sex).filter(it => it === '0')
     const sex1 = data.map(it => it.sex).filter(it => it === '1')
-    // 选出昨天和今天的数据
+    // 选出昨天和今天的数据，拿去显示
+    // filter 过滤出昨天的人数
     const yesterdayCount = data.filter(it => it.time.split(' ')[0] === times(new Date().getTime() - 86400000).split(' ')[0])
     const todayCount = data.filter(it => it.time.split(' ')[0] === times(new Date().getTime()).split(' ')[0])
-    // 计算学院
+    // 计算学院，拿去显示， 关于 count 的使用看 51 行注释
     const maxDepartmentData = this.count(data.map(it => it.department[0]))
     let arr = Object.entries(maxDepartmentData).sort((a, b) => b[1] - a[1])
     let strDepartment = ''
@@ -86,14 +96,15 @@ Page({
       strDepartment = strDepartment + `${it[0]} 占 ${(it[1] * 100 / data.length).toFixed(2)}%，`
     })
     console.log(data)
-    // let maxdepartment = this.getMax('department', maxDepartmentData)
-    // 计算病类
+    // 计算病类，拿去显示
+    // 关于 count 的使用看 51 行注释
     const maxCategoryData = this.count(data.map(it => it.category))
-    // let maxCategory = this.getMax('category', maxCategoryData)
     arr = Object.entries(maxCategoryData).sort((a, b) => b[1] - a[1])
     let strCategory = ''
     strCategory = `"${arr[0][0]}"、"${arr[1][0]}"、"${arr[2][0]}"`
-    // 计算预约最多的日期
+    // 计算预约最多的日期，拿去显示
+    // 关于 count 的使用看 51 行注释
+    // 关于 getMax 的使用看 64 行注释
     const maxTimeData = this.count(data.map(it => it.time.split(' ')[0]))
     let maxTime = this.getMax('time', maxTimeData)
 
@@ -115,34 +126,28 @@ Page({
   },
   
   init1 () {
+    // 初始化图表
     init(
+      // 绑定元素
       this.selectComponent('#ec_line'),
+      // 配置
       echartlinefn(
-        this.data.color,
         hybridData(this.data.userList, 'time'),
-        this.data.userList,
-        'countActivate',
         '人数'
       )
     );
     init(
       this.selectComponent('#ec_bar'),
+      // 配置
       echartBarfn(
-        this.data.color,
         hybridData(this.data.userList, 'department'),
-        this.data.userList,
-        'countActivate',
-        '人数'
       )
     );
     init(
       this.selectComponent('#ec_pie'),
+      // 配置
       echartPiefn(
-        this.data.color,
-        hybridData(this.data.userList, 'department'),
-        this.data.userList,
-        'countActivate',
-        '人数'
+        this.data.userList
       )
     );
   }
